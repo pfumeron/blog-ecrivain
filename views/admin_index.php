@@ -66,7 +66,7 @@
 
 		<div class="news">
 			<h3>Brouillon Rapide</h3>
-			<form  action="index.php?action=createArticle" method="post">
+			<form action="index.php?action=createArticle" method="post">
 	            <div>
 	                <label for="title">Titre</label><br />
 	                <input type="text" id="title" name="title" />
