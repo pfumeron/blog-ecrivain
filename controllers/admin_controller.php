@@ -10,12 +10,7 @@ function adminIndex(){
 	require('views/admin_index.php');
 }
 
-function adminArticlesView(){
-	$articlesUnderReview = findAllArticles('under_review');
-	$articlesValidated = findAllArticles('validated');
 
-	require('views/admin_articleView.php.');
-}
 
 function AdminListComments(){
 	$validatedComments = findAllComments('validated');
@@ -40,7 +35,11 @@ function createArticle($title, $content){
 }
 
 function adminArticles(){
-	$articles = getArticles();
+	$articles = findAllArticles();
+	$nbPublishedArticles = countArticles('published');
+	$nbDraftArticles = countArticles('draft');
+	$nbTotalArticles = $nbPublishedArticles['count'] + $nbDraftArticles['count'];
+
 	require('views/admin_articleView.php');
 }
 

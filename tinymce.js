@@ -1,5 +1,5 @@
 tinymce.init({
-  selector: 'textarea',
+  selector: 'textarea#elm1',
   height: 500,
   menubar: false,
   plugins: [

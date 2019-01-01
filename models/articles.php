@@ -1,12 +1,26 @@
 <?php
 
 //select all articles based on status
-function findAllArticles($articleStatus) {
+function findAllArticles($articleStatus=null) {
     $db = dbConnect();
-    $articles = $db->prepare('SELECT id, title, content, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date, article_status FROM article WHERE article_status = ? ORDER BY comment_date DESC');
-    $articles->execute(array($articleStatus));
+    
+    if ($articleStatus) {
+    	$articles = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date, article_status FROM articles WHERE article_status = ? ORDER BY creation_date DESC');
+    	$articles->execute(array($articleStatus));
+    } else {
+    	$articles = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date, article_status FROM articles ORDER BY creation_date DESC');
+    	$articles->execute();
+    }
 
     return $articles;
+}
+
+function countArticles($articleStatus) {
+	$db = dbConnect();
+	$req = $db->prepare('SELECT COUNT(*) as count FROM articles WHERE article_status = ?');
+	$req->execute(array($articleStatus));
+
+    return $req->fetch();
 }
 
 //select published
@@ -21,7 +35,7 @@ function getArticles()
 	    die('Erreur : '.$e->getMessage());
 	}
 
-	$req = $bdd->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date FROM articles ORDER BY creation_date DESC LIMIT 0, 5');
+	$req = $bdd->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date, article_status FROM articles ORDER BY creation_date DESC LIMIT 0, 5');
 
 	return $req;
 }
@@ -29,7 +43,7 @@ function getArticles()
 function getArticle($articleId)
 {
     $db = new PDO('mysql:host=localhost;dbname=projet_4;charset=utf8', 'root', 'root');
-    $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM articles WHERE id = ?');
+    $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date_fr FROM articles WHERE id = ?');
     $req->execute(array($articleId));
     $article = $req->fetch();
 
