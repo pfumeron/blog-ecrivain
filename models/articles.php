@@ -35,10 +35,11 @@ function getArticles()
 	    die('Erreur : '.$e->getMessage());
 	}
 
-	$req = $bdd->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date, article_status FROM articles ORDER BY creation_date DESC LIMIT 0, 5');
+	$req = $bdd->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date, article_status FROM articles ORDER BY creation_date DESC LIMIT 0, 7');
 
 	return $req;
 }
+
 
 function getArticle($articleId)
 {
@@ -61,8 +62,21 @@ function postArticle($title, $content)
 function validateArticle($articleId) 
 {
     $db = dbConnect();
-    $articleStatus = $db->prepare('UPDATE articles SET article_status = \'published\' WHERE id = ?');
+    $articleStatus = $db->prepare('UPDATE articles SET article_status = \'publié\' WHERE id = ?');
     $articleStatus->execute(array($articleId));
+}
+
+function updateArticles($articleId, $values) {
+	$db = dbConnect();
+	$modifiedArticle = $db->prepare('UPDATE articles SET title = ?, content = ? WHERE id = ? ');
+	$modifiedArticle->execute(array($values['title'], $values['content'],  $articleId));
+}
+
+function removeArticle($articleId)
+{
+    $db = dbConnect();
+    $comments = $db->prepare('DELETE FROM articles WHERE id = ?');
+    $comments->execute(array($articleId));
 }
 
 

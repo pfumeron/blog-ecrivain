@@ -2,7 +2,7 @@
 
 function findAllComments($status) {
     $db = dbConnect();
-    $comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date, status, (SELECT title FROM articles AS a WHERE a.id = article_id) as article_title FROM comments WHERE status = ? ORDER BY comment_date DESC');
+    $comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date, status, (SELECT title FROM articles AS a WHERE a.id = article_id) as article_title FROM comments WHERE status = ? ORDER BY comment_date DESC');
     $comments->execute(array($status));
 
     return $comments;
@@ -11,7 +11,7 @@ function findAllComments($status) {
 function getComments($articleId, $status)
 {
     $db = dbConnect();
-    $comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date, status FROM comments WHERE article_id = ? AND status = ? ORDER BY comment_date ASC');
+    $comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date, status FROM comments WHERE article_id = ? AND status = ? ORDER BY comment_date ASC');
     $comments->execute(array($articleId,$status));
 
     return $comments;

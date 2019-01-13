@@ -21,7 +21,23 @@
     
         
     <body>
+		<header>
+			<nav class="navbar-default sidebar">
+				<div class="slimScrollDiv">
+					<div class="sidebar-nav slimscrollsidebar">
+						<ul class="nav in" id="side-menu">
+							<li class="accueil"><a class="waves-effect active" href="#accueil">Accueil</a></li>
+							<li><a class="waves-effect active" href="#services">Services</a></li>
+							<li><a class="waves-effect active" href="#portfolio">Portfolio</a></li>
+							<li><a class="waves-effect active" href="#contact">Contact</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+
         <h1>Admin de mon super blog !</h1>
+        <div><a class="btn btn btn-rounded btn-default btn-outline m-r-5" href="index.php?action=newArticle">Créer un nouvel article</a></div>
 	    <div class="row">
 	    	<div class="col-md-12 col-lg-12 col-sm-12">    
 		        <div class="white-box">
@@ -52,10 +68,10 @@
 						        			<td>Le <?php echo $article['creation_date']; ?></td>
 						        			<td><?php echo htmlspecialchars($article['title']); ?></td>
 						        			<td><a href="index.php?action=publishArticle&id=<?php echo $article['id'] ?>">Publier</a> | 
-            									<a href="index.php?action=validComment&id=<?php echo $comment['id'] ?>">Modifier</a> | 
-        										<a href="index.php?action=deleteComment&id=<?php echo $comment['id'] ?>">Supprimer</a>
+            									<a href="index.php?action=editArticle&id=<?php echo $article['id'] ?>">Modifier</a> | 
+        										<a href="index.php?action=deleteArticle&id=<?php echo $article['id'] ?>">Supprimer</a>
         									</td>
-        									<td class="badge"><?php echo $article['article_status']; ?></td>
+        									<td class="list-group-item list-group-item-success"><?php echo $article['article_status']; ?></td>
 						        			
 						        		</tr>
 						        	<?php
@@ -69,65 +85,6 @@
 						</div>
 				</div>
 			</div>
-		</div>
-
-        
-
-        <div class="row">
-	    	<div class="col-md-12 col-lg-12 col-sm-12">    
-		        <div class="white-box">
-			        <h2 class="box-title">Écrire un nouvel article</h2>
-				        <div class="comment-center">
-	                    	<div class="mail-contnet">
-						        <form class="form" action="index.php?action=createArticle" method="post">
-						        	<div class="form-group">
-							            <label for="title">Titre</label><br />
-						        		<input class="form-control" type="text" id="title" name="title" />
-						        	</div>
-
-						        	<div>
-							        <label for="content">Contenu de l'article</label><br />
-							        <textarea id="content" name="content" rows="15">
-
-										
-
-									</textarea>
-									</div>
-									<div>
-							        	<input class="btn btn btn-rounded btn-default btn-outline m-r-5" value="Enregistrer" type="submit" />
-							        </div>
-								</form>
-							</div>
-						</div>
-				</div>
-			</div>
-		</div>
-        
-        <?php
-        while ($article = $articles->fetch())
-        {
-        ?>
-        
-        <div class="news">
-            <h3>
-                <a href="index.php?action=getArticle&id=<?php echo $article['id'] ?>"><?php echo htmlspecialchars($article['title']); ?></a> 
-                <em>le <?php echo $article['creation_date']; ?></em>
-            </h3>
-            
-            <p>
-            <?php
-            	echo $article['content'];
-            ?>
-            <br /></p>
-            
-            
-
-        </div>
-        <?php
-        }
-        $articles->closeCursor();
-        ?>
-
 		</div>
 	</body>
 </html>

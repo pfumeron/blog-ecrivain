@@ -26,16 +26,28 @@ if (isset($_GET['action'])) {
                 echo 'Erreur : tous les champs ne sont pas remplis !';
         }
     }
+    elseif ($_GET['action'] == 'newArticle') {
+        postNewArticle();
+    }
     elseif ($_GET['action'] == 'publishArticle') {
         publishArticle();
     }
 
+    elseif ($_GET['action'] == 'editArticle') {
+        editArticle($_GET['id']);
+    }
+    elseif ($_GET['action'] == 'updateArticle') {
+        updateArticle();    
+    }
     //Comments updates
     elseif ($_GET['action'] == 'validComment') {
         validComment();
     }
     elseif ($_GET['action'] == 'deleteComment') {
         deleteComment();
+    }
+    elseif ($_GET['action'] == 'deleteArticle') {
+        deleteArticle();
     }
     //
     elseif ($_GET['action'] == 'getArticle') {

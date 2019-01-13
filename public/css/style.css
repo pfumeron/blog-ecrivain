@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Rubik');
 
 
+
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -16,6 +17,9 @@ body {
   font-family: 'Rubik', sans-serif;
   margin: 0;
 }
+
+
+
 article,
 aside,
 details,
@@ -1606,6 +1610,7 @@ pre code {
     width: 1170px;
   }
 }
+
 .container-fluid {
   padding-right: 15px;
   padding-left: 15px;
@@ -6817,6 +6822,7 @@ button.close {
 .capitalize {
   text-transform: capitalize;
 }
+
 
 
 

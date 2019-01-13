@@ -15,11 +15,27 @@
     </head>
         
     <body>
+    	<header>
+			<nav class="navbar-default sidebar">
+				<div class="slimScrollDiv">
+					<div class="sidebar-nav slimscrollsidebar">
+						<ul class="nav in" id="side-menu">
+							<li class="accueil"><a class="waves-effect active" href="#accueil">Accueil</a></li>
+							<li><a class="waves-effect active" href="#services">Services</a></li>
+							<li><a class="waves-effect active" href="#portfolio">Portfolio</a></li>
+							<li><a class="waves-effect active" href="#contact">Contact</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+
+
     	<h1>Admin de mon super blog !</h1>
     	
 
 		<div class="row">
-			<div class="col-md-12 col-lg-8 col-sm-12">
+			<div class="col-md-6 col-sm-6">
 	            <div class="white-box">
 	                <h2 class="box-title">Derniers billets du blog</h2>
 	                <div class="comment-center">
@@ -30,6 +46,7 @@
 					        ?>
 					            
 					        <h3><?php echo $data['title']; ?></h3>
+					        <p>Nombre de commentaires (<?php echo $nbTotalArticles ?>))</p><p>Nouveaux Commentaires ()</p>
 					        <p class="time">Publié le <?php echo $data['creation_date']; ?></p>    
 					        
 					        <a class="btn btn btn-rounded btn-default btn-outline m-r-5" href="index.php?action=getArticle&id=<?php echo $data['id'] ?>">Voir l'article</a>
@@ -44,33 +61,8 @@
 	            </div>
 	        </div>
 
-	        <div class="col-md-12 col-lg-4 col-sm-12">
-	        	<div class="white-box">
-	                <h2 class="box-title">Brouillon Rapide</h2>
-	                	<div class="comment-center">
-	                    	<div class="mail-contnet">
-								<form class="form" action="index.php?action=createArticle" method="post">
-						        	<div class="form-group">
-							            <h3><label for="title">Titre</label></h3>
-						        		<input class="form-control" type="text" id="title" name="title" />
-						        	</div>
 
-						        	<div>
-							        	<h3><label for="content">Contenu de l'article</label></h3>
-							        	<textarea id="content" name="content" rows="15"></textarea>
-									</div>
-									<div >
-							        	<input class="btn btn btn-rounded btn-default btn-outline m-r-5" value="Enregistrer" type="submit"  />
-							        </div>
-								</form>
-							</div>
-						</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-	        <div class="col-md-12 col-lg-8 col-sm-12">
+	        <div class="col-md-6 col-sm-6">
 	            <div class="white-box">
 	                <h2 class="box-title">Nouveaux commentaires</h2>
 				        <div class="comment-center">
@@ -104,7 +96,7 @@
 						</div>
 				</div>
 			</div>
-		</div>
+
 
 
     </body>

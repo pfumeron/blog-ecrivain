@@ -29,15 +29,24 @@ function deleteComment(){
 	header('Location: http://localhost:8888/projet_4/index.php?action=admin');
 }
 
+function deleteArticle() {
+	removeArticle($_GET['id']);
+	header('Location: http://localhost:8888/projet_4/index.php?action=adminArticles');
+}
+
 function createArticle($title, $content){
 	postArticle($title, $content);
-	header('Location: http://localhost:8888/projet_4/index.php?action=admin');
+	header('Location: http://localhost:8888/projet_4/index.php?action=adminArticles');
+}
+
+function postNewArticle() {
+	require('views/admin_createArticle.php');
 }
 
 function adminArticles(){
 	$articles = findAllArticles();
-	$nbPublishedArticles = countArticles('published');
-	$nbDraftArticles = countArticles('draft');
+	$nbPublishedArticles = countArticles('publié');
+	$nbDraftArticles = countArticles('brouillon');
 	$nbTotalArticles = $nbPublishedArticles['count'] + $nbDraftArticles['count'];
 
 	require('views/admin_articleView.php');
@@ -45,6 +54,16 @@ function adminArticles(){
 
 function publishArticle(){
 	validateArticle($_GET['id']);
+	header('Location: http://localhost:8888/projet_4/index.php?action=adminArticles');
+}
+
+function editArticle() {
+	$article = getArticle($_GET['id']);
+	require('views/admin_editArticle.php');
+}
+
+function updateArticle() {
+	updateArticles($_GET['id'], ['title' => $_POST['title'], 'content' => $_POST['content']]);
 	header('Location: http://localhost:8888/projet_4/index.php?action=adminArticles');
 }
 
