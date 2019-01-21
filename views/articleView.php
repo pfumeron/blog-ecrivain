@@ -10,7 +10,7 @@
     <body class="article-view">
         <div class="navbar-header">
             <div class="logo">
-                <img src="https://placekitten.com/300/100"/>
+                <img src="public/images/logo_blog.png"/>
             </div>
             <ul>
                 <li><a href="#">Articles</a></li>
@@ -24,7 +24,9 @@
 
         <div class="container" id="article-page">
             <div class="content-article">
-                <h3><?= htmlspecialchars($article['title']) ?></h3>
+                <div class="content-article-title">
+                    <h3><?= htmlspecialchars($article['title']) ?></h3>
+                </div>
                 <p class="date">Publié le <? echo $article['creation_date_fr'] ?></p>
                 
                 <p class="text-article"><?= $article['content'] ?></p>

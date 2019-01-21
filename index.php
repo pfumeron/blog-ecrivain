@@ -9,6 +9,12 @@ if (isset($_GET['action'])) {
     if ($_GET['action'] == 'home') {
         listArticles();
     }
+    if ($_GET['action'] == 'login') {
+        loginView();
+    }
+    if ($_GET['action'] == 'loginVerify') {
+        login($_POST['email'],$_POST['password']);
+    }
     elseif ($_GET['action'] == 'admin') {
         adminIndex();
     }

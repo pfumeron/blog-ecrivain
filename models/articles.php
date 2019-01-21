@@ -1,4 +1,12 @@
 <?php
+ 
+function logAdmin($email,$password) {
+	$db = dbConnect();
+	$admin = $db->prepare('SELECT email, password FROM admin WHERE email = ? AND password = ?');
+	$admin->execute(array($email,$password));
+
+    return $admin->fetch();
+}
 
 //select all articles based on status
 function findAllArticles($articleStatus=null) {
@@ -36,6 +44,22 @@ function getArticles()
 	}
 
 	$req = $bdd->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date, article_status FROM articles ORDER BY creation_date DESC LIMIT 0, 7');
+
+	return $req;
+}
+
+function getArticlesAdmin()
+{
+	try
+	{
+	    $bdd = new PDO('mysql:host=localhost;dbname=projet_4;charset=utf8', 'root', 'root');
+	}
+	catch(Exception $e)
+	{
+	    die('Erreur : '.$e->getMessage());
+	}
+
+	$req = $bdd->query('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date, a.article_status, SUM( CASE WHEN c.status = \'under_review\' THEN 1 ELSE 0 END) AS nbNewComment, COUNT(c.id) as nbTotalComments FROM articles as a LEFT JOIN comments as c ON a.id = c.article_id GROUP BY a.id ORDER BY creation_date DESC LIMIT 0, 5');
 
 	return $req;
 }

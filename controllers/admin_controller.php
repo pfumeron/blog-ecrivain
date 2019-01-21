@@ -2,15 +2,19 @@
 
 require_once('models/articles.php');
 
-
 function adminIndex(){
-	$articles = getArticles();
-	$comments = findAllComments('under_review');
-
+	$articles = getArticlesAdmin();
 	require('views/admin_index.php');
 }
 
-
+function login($email, $password){
+	$adminlogged = logAdmin($_POST['email'],$_POST['password']);
+	if ($adminlogged) {
+		header('Location: http://localhost:8888/projet_4/index.php?action=admin');
+	} else {
+		header('Location: http://localhost:8888/projet_4/index.php?action=login');
+	}
+}
 
 function AdminListComments(){
 	$validatedComments = findAllComments('validated');

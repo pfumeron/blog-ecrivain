@@ -8,7 +8,7 @@
     <body>
         <div class="navbar-header">
             <div class="logo">
-                <img src="https://placekitten.com/300/100"/>
+                <img src="public/images/logo_blog.png"/>
             </div>
             <ul>
                 <li><a href="#">Articles</a></li>
@@ -37,14 +37,16 @@
                 </div>
             </div>
             
-            <div><h2 class="main-title">Derniers aticles</h2></div>
+            <div><h2 class="main-title">Derniers articles</h2></div>
 
             <?php $index = 0; ?>
             <?php while ($data = $articles->fetch()) { ?>
                 <?php if ($index % 3 == 0) { ?> <div class="row second-row"> <?php } ?>
                 <div class="article">
-                    <a href="index.php?action=getArticle&id=<?php echo $data['id'] ?>"><h3 class="article-title"><span><?php echo $data['title']; ?></span></h3></a>
-                    <p><?php echo $data['creation_date'] ?></p>
+                    <div class="article-title-background">
+                        <a href="index.php?action=getArticle&id=<?php echo $data['id'] ?>"><h3 class="article-title"><span><?php echo $data['title']; ?></span></h3></a>
+                    </div>
+                    <p>Publié le <?php echo $data['creation_date'] ?></p>
                 </div>
                 <?php $index++; ?>
                 <?php if ($index % 3 == 0) { ?> </div> <?php } ?>
@@ -52,10 +54,7 @@
             <?php } $articles->closeCursor(); ?>
         </div>
         <footer>
-            <ul>
-                <li><a>Ici c'est du texte</a></li>
-                <li><a>Et ici aussi</a></li>
-            </ul>
+            <p>Jean Forteroche ©2019 Tous droits réservés</p>
         </footer>
 
     </body>

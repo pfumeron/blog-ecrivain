@@ -30,6 +30,9 @@ function listArticleAndComment()
 	}
 }
 
+function loginView() {
+	require('views/login.php');
+}
 
 function addComment($articleId, $author, $comment)
 {
