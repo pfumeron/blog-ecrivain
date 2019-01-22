@@ -49,6 +49,55 @@
                 </div>
             </div>
 
+            <div class="row">
+	    	<div class="col-md-12 col-lg-12 col-sm-12">    
+		        <div class="white-box">
+			        <h2 class="box-title">Articles</h2>
+			        	<p><a>Tous (<?php echo $nbTotalArticles ?>)</a> | <a>Publiés (<?php echo $nbPublishedArticles['count']; ?>)</a> | <a>Brouillons (<?php echo $nbDraftArticles['count']; ?>)</a></p>
+			        	<div class="comment-center">
+		                    <div class="mail-contnet">
+						        <table class="table table-bordered table-hover table-responsive">
+						        	<thead>
+						        		<colgroup width="15%" />
+						        		<colgroup width="45%" />
+						        		<colgroup width="25%" />
+						        		<colgroup width="15%" />
+						        		<tr>
+						        			<th>Date de publication</th>
+						        			<th>Titre</th>
+						        			<th>Actions</th>
+						        			<th>Statut</th>
+						        		</tr>
+						        	</thead>
+						        	<tbody>
+
+						        	<?php
+							        while ($article = $articles->fetch())
+							        {
+							        ?>
+						        		<tr>
+						        			<td>Le <?php echo $article['creation_date']; ?></td>
+						        			<td><?php echo htmlspecialchars($article['title']); ?></td>
+						        			<td><a href="index.php?action=publishArticle&id=<?php echo $article['id'] ?>">Publier</a> | 
+            									<a href="index.php?action=editArticle&id=<?php echo $article['id'] ?>">Modifier</a> | 
+        										<a href="index.php?action=deleteArticle&id=<?php echo $article['id'] ?>">Supprimer</a>
+        									</td>
+        									<td class="list-group-item list-group-item-success"><?php echo $article['article_status']; ?></td>
+						        			
+						        		</tr>
+						        	<?php
+							        }
+							        $articles->closeCursor();
+							        ?>
+						        	</tbody>
+							
+						        </table>
+						    </div>
+						</div>
+				</div>
+			</div>
+		</div>
+
         	
 		</div>
 

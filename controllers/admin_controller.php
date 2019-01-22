@@ -48,7 +48,7 @@ function postNewArticle() {
 }
 
 function adminArticles(){
-	$articles = findAllArticles();
+	$articles = getArticlesAdmin();
 	$nbPublishedArticles = countArticles('publié');
 	$nbDraftArticles = countArticles('brouillon');
 	$nbTotalArticles = $nbPublishedArticles['count'] + $nbDraftArticles['count'];
