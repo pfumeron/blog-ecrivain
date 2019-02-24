@@ -212,6 +212,56 @@ footer p {
 	color: #ffffff;
 }
 
+.btn-comments {
+	border: solid 1px #005574;
+	border-radius: 5px;
+	padding: 10px 15px;
+	color:#434247;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.btn-comments:hover {
+	background-color: #005574;
+	color: #ffffff;
+}
+
+.subtitle-section {
+	text-align: center;
+}
+
+.subtitle {
+	text-transform: uppercase;
+	font-size: 12px;
+	letter-spacing: 1px;
+}
+
+.subtitle:hover {
+	text-decoration: underline;
+}
+
+.all-articles {
+	margin: 30px;
+    text-align: center;
+}
+
+.btn-home-articles {
+	border: solid 1px #005574;
+	border-radius: 5px;
+	padding: 10px 15px;
+	text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+
+.btn-home-articles:hover {
+	background-color: #005574;
+	color: #ffffff;
+}
+
 .content-article-title {
 	background-color: #C3EAE2;
 	line-height: 12px;
@@ -313,6 +363,7 @@ h4 {
 /* CSS ADMIN */
 .row {
 	margin-left: 20px;
+	margin-right: 20px;
 }
 
 .admin-left-block {
@@ -331,12 +382,21 @@ h4 {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 14px;
+    margin-right: 3px;
 }
+
 
 .btn-view-admin:hover {
 	background-color: #005574;
 	color: #ffffff;
 }
+
+.btn-view-admin.disconnect:hover{
+	background-color: red;
+	color:#ffffff;
+	border: 1px solid #ffffff;
+}
+
 
 .badge {
 	text-transform: uppercase;
@@ -371,7 +431,7 @@ h4 {
 .top-right {
 	position: absolute;
 	right:0;
-	margin-right: 20px;
+	margin-right: 18px;
 }
 
 .btn-class {
@@ -381,6 +441,7 @@ h4 {
 
 table {
 	border: solid 1px #005574;
+
 }
 
 .table-title {
@@ -392,5 +453,35 @@ table {
 
 .table-content {
 	text-align: center;
-	line-height:30px;
+	line-height:40px;
+}
+
+tr .publié .btn-publish {
+	display: none;
+} 
+
+tr .btn-publish:hover, .btn-modify:hover, .btn-delete:hover, .btn-new-comment:hover {
+	text-decoration: underline;
+}
+
+tr .publié-status span {
+	background-color: green;
+	border-radius: 10px;
+	color:#ffffff;
+	padding: 6px;
+}
+
+tr .brouillon-status span {
+	background-color: orange;
+	border-radius: 10px;
+	color:#ffffff;
+	padding: 6px;
+} 
+
+.btn-form {
+	margin-top: 15px;
+}
+
+.my_class {
+	box-sizing: border-box;
 }

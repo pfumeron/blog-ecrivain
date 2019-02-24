@@ -1,38 +1,37 @@
 <?php
-
 require_once('models/articles.php');
+require_once('models/comments.php');
+
+// HOMEPAGE VIEW
+
+function listAllArticles() {
+	$articles = findAllArticles('publié');
+	require('views/blog/allArticles.php');
+}
+
+// VIEW ALL ARTICLES LIST
 
 function listArticles()
 {
 	$articles = getArticles();
-	require('views/home.php');
+	require('views//blog/home.php');
 }
 
-require('models/comments.php');
-
-
-function listComments()
-{
-	$comments = getComments($_GET['id'],'validated');
-	require('views/commentView.php');
-}
-
+// VIEW ARTICLE PAGE WITH VALIDATED COMMENTS
 
 function listArticleAndComment()
 {
 	if (isset($_GET['id']) && $_GET['id'] > 0) {
 	    $article = getArticle($_GET['id']);
 	    $comments = getComments($_GET['id'],'validated');
-	    require('views/articleView.php');
+	    require('views/blog/articleView.php');
 	}
 	else {
 	    echo 'Erreur : aucun identifiant de billet envoyé';
 	}
 }
 
-function loginView() {
-	require('views/login.php');
-}
+// ADD COMMENT ON ARTICLE PAGE
 
 function addComment($articleId, $author, $comment)
 {
@@ -42,6 +41,6 @@ function addComment($articleId, $author, $comment)
         die('Impossible d\'ajouter le commentaire !');
     }
     else {
-        header('Location: views/thankyou.php');
+        header('Location: views/blog/thankyou.php');
     }
 }

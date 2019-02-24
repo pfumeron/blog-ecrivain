@@ -1,22 +1,17 @@
 <?php
 
-function findAllComments($status) {
-    $db = dbConnect();
-    $comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date, status, (SELECT title FROM articles AS a WHERE a.id = article_id) as article_title FROM comments WHERE status = ? ORDER BY comment_date DESC');
-    $comments->execute(array($status));
-
-    return $comments;
-}
+// DISPLAY COMMENTS BASED ON STATUS OF A SPECIFIC ARTICLE
 
 function getComments($articleId, $status)
 {
     $db = dbConnect();
-    $comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date, status FROM comments WHERE article_id = ? AND status = ? ORDER BY comment_date ASC');
+    $comments = $db->prepare('SELECT id, article_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date, status FROM comments WHERE article_id = ? AND status = ? ORDER BY comment_date ASC');
     $comments->execute(array($articleId,$status));
 
     return $comments;
 }
 
+// ADD COMMENT TO DATABASE
 
 function postComment($articleId, $author, $comment)
 {
@@ -27,6 +22,7 @@ function postComment($articleId, $author, $comment)
     return $affectedLines;
 }
 
+// VALIDATE COMMENT POSTED ABOUT AN ARTICLE
 
 function updateComment($commentId) 
 {
@@ -34,6 +30,8 @@ function updateComment($commentId)
     $comments = $db->prepare('UPDATE comments SET status = \'validated\' WHERE id = ?');
     $comments->execute(array($commentId));
 }
+
+// DELETE COMMENT POSTED ABOUT AN ARTICLE
 
 function removeComment($commentId)
 {
@@ -43,7 +41,6 @@ function removeComment($commentId)
 }
 
 
-// Nouvelle fonction qui nous permet d'éviter de répéter du code
 function dbConnect()
 {
     try
