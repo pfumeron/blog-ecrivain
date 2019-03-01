@@ -4,7 +4,7 @@
 
 function getArticles() {
 	$db = dbConnect();
-	$req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date, article_status FROM articles WHERE article_status = \'publié\' ORDER BY creation_date DESC LIMIT 0, 4');
+	$req = $db->query('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date, a.article_status FROM articles AS a WHERE article_status = \'publié\' ORDER BY a.creation_date DESC LIMIT 0, 4');
 
 	return $req;
 }
@@ -40,11 +40,11 @@ function getArticle($articleId) {
 function getArticlesAdmin($articleStatus=null) {
 	$db = dbConnect();
 	if ($articleStatus) {
-    	$req = $db->prepare('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date, a.article_status, SUM( CASE WHEN c.status = \'under_review\' THEN 1 ELSE 0 END) AS nbNewComment, COUNT(c.id) as nbTotalComments FROM articles as a LEFT JOIN comments as c ON a.id = c.article_id WHERE a.article_status = ? GROUP BY a.id ORDER BY creation_date');
+    	$req = $db->prepare('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date, a.article_status, SUM( CASE WHEN c.status = \'under_review\' THEN 1 ELSE 0 END) AS nbNewComment, COUNT(c.id) as nbTotalComments FROM articles as a LEFT JOIN comments as c ON a.id = c.article_id WHERE a.article_status = ? GROUP BY a.id ORDER BY a.creation_date DESC');
     	$req->execute(array($articleStatus));
 
     } else {
-    	$req = $db->query('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date, a.article_status, SUM( CASE WHEN c.status = \'under_review\' THEN 1 ELSE 0 END) AS nbNewComment, COUNT(c.id) as nbTotalComments FROM articles as a LEFT JOIN comments as c ON a.id = c.article_id GROUP BY a.id ORDER BY creation_date');
+    	$req = $db->query('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date, a.article_status, SUM( CASE WHEN c.status = \'under_review\' THEN 1 ELSE 0 END) AS nbNewComment, COUNT(c.id) as nbTotalComments FROM articles as a LEFT JOIN comments as c ON a.id = c.article_id GROUP BY a.id ORDER BY a.creation_date DESC');
     }
 
 	return $req;
