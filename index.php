@@ -31,6 +31,11 @@ if (isset($_GET['action'])) {
             echo 'Erreur : aucun identifiant de billet envoyé';
         }
     }
+    elseif ($_GET['action'] == 'alertComment') {
+        if (isset($_GET['id']) && $_GET['id'] > 0) {
+            alertComment();
+        }
+    }
 
     // ROUTES LOGIN / LOGOUT 
 

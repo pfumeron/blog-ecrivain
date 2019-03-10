@@ -353,6 +353,23 @@ h4 {
 	font-size:16px;
 }
 
+.comment-reviewed:hover + a {
+	display: inline-block;
+	color:grey;
+	font-size:12px;
+}
+
+
+.icon-alert {
+	display: block;
+	color:#aaaaaa;
+	font-size:12px;
+}
+
+.icon-alert:hover {
+	color:black;
+}
+
 .comment-info {
 	font-size: 12px;
 	margin: 0;

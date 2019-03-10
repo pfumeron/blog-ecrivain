@@ -42,7 +42,6 @@ function showArticleWithComments() {
 
 function validComment(){
 	updateComment($_GET['id']);
-	$alert = "Le commentaire a bien été publié";
 	header("Location: http://localhost:8888/projet_4/index.php?action=adminGetArticle&id=" . $_GET['articleId']);
 }
 

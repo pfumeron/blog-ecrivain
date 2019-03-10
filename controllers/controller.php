@@ -44,3 +44,10 @@ function addComment($articleId, $author, $comment)
         header('Location: views/blog/thankyou.php');
     }
 }
+
+// FLAG COMMENT ON A ARTICLE
+
+function alertComment(){
+	flagComment($_GET['id']);
+	header("Location: http://localhost:8888/projet_4/index.php?action=getArticle&id=" . $_GET['articleId']);
+}

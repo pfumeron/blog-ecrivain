@@ -40,12 +40,19 @@ function removeComment($commentId)
     $comments->execute(array($commentId));
 }
 
+// FLAG COMMENT 
+function flagComment($commentId) {
+    $db = dbConnect();
+    $comments = $db->prepare('UPDATE comments SET flaggued = \'true\' WHERE id = ?');
+    $comments->execute(array($commentId));
+}
 
 function dbConnect()
 {
     try
-    {
-        $db = new PDO('mysql:host=localhost;dbname=projet_4;charset=utf8', 'root', 'root');
+    {   
+        $dbopts = parse_url(getenv('DATABASE_URL'));
+        $db = new PDO($dbopts['scheme'].':host='.$dbopts['host'].';dbname='.ltrim($dbopts["path"],'/').';',$dbopts['user'],$dbopts['pass']);
         return $db;
     }
     catch(Exception $e)
