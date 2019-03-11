@@ -8,11 +8,13 @@ if (isset($_GET['action'])) {
     // ROUTES BLOG
 
     if ($_GET['action'] == 'home') {
+        
         listAllArticles();
+        
     }
     elseif ($_GET['action'] == 'getArticle') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                listArticleAndComment();
+                listArticleAndComment($_GET['id']);
             }
             else {
                 echo 'Erreur : aucun identifiant de billet envoyé';
@@ -33,7 +35,7 @@ if (isset($_GET['action'])) {
     }
     elseif ($_GET['action'] == 'alertComment') {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
-            alertComment();
+            alertComment($_GET['id']);
         }
     }
 
@@ -103,7 +105,7 @@ if (isset($_GET['action'])) {
     elseif ($_GET['action'] == 'publishArticle') {
         session_start(); 
         if (isset($_SESSION['id'])){
-            publishArticle();
+            publishArticle($_GET['id']);
         } else {  
             header("Location: http://localhost:8888/projet_4/index.php?action=login"); 
         }
@@ -112,7 +114,11 @@ if (isset($_GET['action'])) {
     elseif ($_GET['action'] == 'editArticle') {
         session_start(); 
         if (isset($_SESSION['id'])){
-            editArticle($_GET['id']);
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                editArticle($_GET['id']);
+            } else {
+                echo 'Erreur : aucun identifiant de billet envoyé';
+            }
         } else {  
             header("Location: http://localhost:8888/projet_4/index.php?action=login"); 
         }
@@ -120,7 +126,7 @@ if (isset($_GET['action'])) {
     elseif ($_GET['action'] == 'updateArticle') {
         session_start(); 
         if (isset($_SESSION['id'])){    
-            updateArticle();
+            updateArticle($_GET['id']);
         } else {  
             header("Location: http://localhost:8888/projet_4/index.php?action=login"); 
         }    
@@ -128,7 +134,7 @@ if (isset($_GET['action'])) {
     elseif ($_GET['action'] == 'validComment') {
         session_start(); 
         if (isset($_SESSION['id'])){
-            validComment();
+            validComment($_GET['id']);
         } else {  
             header("Location: http://localhost:8888/projet_4/index.php?action=login"); 
         } 
@@ -144,7 +150,7 @@ if (isset($_GET['action'])) {
     elseif ($_GET['action'] == 'deleteArticle') {
         session_start(); 
         if (isset($_SESSION['id'])){
-            deleteArticle();
+            deleteArticle($_GET['id']);
         } else {  
             header("Location: http://localhost:8888/projet_4/index.php?action=login"); 
         }

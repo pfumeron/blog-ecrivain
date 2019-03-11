@@ -11,7 +11,7 @@ function loginView() {
 }
 
 function login($email, $password){
-	$adminlogged = logAdmin($_POST['email'],$_POST['password']);
+	$adminlogged = logAdmin($email,$password);
 	if (isset($adminlogged)) {
         session_start();
         $_SESSION['id'] = $adminlogged['id'];
@@ -32,21 +32,21 @@ function adminArticles($articleStatus=null){
 	require('views/admin/articleView.php');
 }
 
-function showArticleWithComments() {
-	$article = getArticle($_GET['id']);
-	$comments = getComments($_GET['id'],'under_review');
+function showArticleWithComments($articleId) {
+	$article = getArticle($articleId);
+	$comments = getComments($articleId,'under_review');
 	require('views/admin/pageViewComments.php');
 }
 
 // COMMENTS ADMINISTRATION
 
-function validComment(){
-	updateComment($_GET['id']);
+function validComment($articleId){
+	updateComment($articleId);
 	header("Location: http://localhost:8888/projet_4/index.php?action=adminGetArticle&id=" . $_GET['articleId']);
 }
 
-function deleteComment(){
-	removeComment($_GET['id']);
+function deleteComment($articleId){
+	removeComment($articleId);
 	header("Location: http://localhost:8888/projet_4/index.php?action=adminGetArticle&id=" . $_GET['articleId']);
 }
 
@@ -61,18 +61,18 @@ function createArticle($title, $content){
 	header('Location: http://localhost:8888/projet_4/index.php?action=adminArticles');
 }
 
-function publishArticle(){
-	validateArticle($_GET['id']);
+function publishArticle($articleId){
+	validateArticle($articleId);
 	header('Location: http://localhost:8888/projet_4/index.php?action=adminArticles');
 }
 
-function deleteArticle() {
-	removeArticle($_GET['id']);
+function deleteArticle($articleId) {
+	removeArticle($articleId);
 	header('Location: http://localhost:8888/projet_4/index.php?action=adminArticles');
 }
 
-function editArticle() {
-	$article = getArticle($_GET['id']);
+function editArticle($articleId) {
+	$article = getArticle($articleId);
 	require('views/admin/editArticle.php');
 }
 

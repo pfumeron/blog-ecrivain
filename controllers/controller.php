@@ -19,16 +19,11 @@ function listArticles()
 
 // VIEW ARTICLE PAGE WITH VALIDATED COMMENTS
 
-function listArticleAndComment()
+function listArticleAndComment($articleId)
 {
-	if (isset($_GET['id']) && $_GET['id'] > 0) {
-	    $article = getArticle($_GET['id']);
-	    $comments = getComments($_GET['id'],'validated');
-	    require('views/blog/articleView.php');
-	}
-	else {
-	    echo 'Erreur : aucun identifiant de billet envoyé';
-	}
+    $article = getArticle($articleId);
+    $comments = getComments($articleId,'validated');
+    require('views/blog/articleView.php');
 }
 
 // ADD COMMENT ON ARTICLE PAGE
@@ -47,7 +42,7 @@ function addComment($articleId, $author, $comment)
 
 // FLAG COMMENT ON A ARTICLE
 
-function alertComment(){
-	flagComment($_GET['id']);
+function alertComment($articleId){
+	flagComment($articleId);
 	header("Location: http://localhost:8888/projet_4/index.php?action=getArticle&id=" . $_GET['articleId']);
 }
