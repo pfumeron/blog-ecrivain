@@ -74,9 +74,12 @@ body {
 .featured-title span {
 	display: block;
 	font-family: "Josefin Sans","Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 72px;
+	font-size: 35px;
 	color:#ffffff;
 	padding: 40px 10px 0px 20px;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .featured-article p {
@@ -128,6 +131,7 @@ body {
 .article {
 	background-color: #06B3B8;
 	min-width: 33%;
+	max-width: 33%;
 	margin-top: 10px;
 	height:300px;
 	border-radius: 4px;
