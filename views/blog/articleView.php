@@ -46,11 +46,11 @@
                 <form action="index.php?action=addComment&amp;id=<?= $article['id'] ?>" method="post">
                     <div>
                         <label for="author">Votre nom</label><br />
-                        <input type="text" id="author" name="author" />
+                        <input type="text" id="author" name="author" required/>
                     </div>
                     <div>
                         <label for="comment">Votre commentaire</label><br />
-                        <textarea id="comment" name="comment"></textarea>
+                        <textarea id="comment" name="comment" required></textarea>
                     </div>
                     <div>
                         <input type="submit" />
