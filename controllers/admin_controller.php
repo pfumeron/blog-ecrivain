@@ -1,7 +1,6 @@
 <?php
 
-require_once('models/articles.php');
-require_once('models/admin.php');
+require_once('models/index.php');
 
 
 // ADMIN DASHBOARD PAGES VIEWS

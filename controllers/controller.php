@@ -1,6 +1,5 @@
 <?php
-require_once('models/articles.php');
-require_once('models/comments.php');
+require_once('models/index.php');
 
 // HOMEPAGE VIEW
 

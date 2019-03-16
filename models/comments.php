@@ -47,16 +47,3 @@ function flagComment($commentId) {
     $comments->execute(array($commentId));
 }
 
-function dbConnect()
-{
-    try
-    {   
-        $dbopts = parse_url(getenv('DATABASE_URL'));
-        $db = new PDO($dbopts['scheme'].':host='.$dbopts['host'].';dbname='.ltrim($dbopts["path"],'/').';',$dbopts['user'],$dbopts['pass']);
-        return $db;
-    }
-    catch(Exception $e)
-    {
-        die('Erreur : '.$e->getMessage());
-    }
-}
