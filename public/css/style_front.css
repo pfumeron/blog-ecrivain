@@ -506,3 +506,9 @@ tr .brouillon-status span {
 .my_class {
 	box-sizing: border-box;
 }
+
+.thank-you-title {
+	text-align:center;
+	font-family: "Josefin Sans","Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 22px;
+}

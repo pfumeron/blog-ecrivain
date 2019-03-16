@@ -10,9 +10,14 @@
             <div class="logo">
                 <a href="index.php"><img src="public/images/logo_blog.png"/></a>
             </div>
-            
         </div>
-        <p><a href="index.php?action=home">Retour à la liste des billets</a></p>
-        <p>Merci, votre commentaire a bien été soumis !</p>
+        
+        <div class="subtitle-section">
+            <a class="subtitle" href="index.php">Retour à la page d'accueil</a>
+        </div>
+        
+        <div class="thank-you-title">
+            <h3>Merci, votre commentaire a bien été soumis !</h3>
+        </div>
     </body>
 </html>

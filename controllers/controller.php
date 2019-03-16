@@ -36,8 +36,14 @@ function addComment($articleId, $author, $comment)
         die('Impossible d\'ajouter le commentaire !');
     }
     else {
-        header('Location: views/blog/thankyou.php');
+        header('Location: http://localhost:8888/projet_4/index.php?action=thankYou');
     }
+}
+
+// THANK YOU PAGE
+
+function thankYouView() {
+	require('views/blog/thankyou.php');
 }
 
 // FLAG COMMENT ON A ARTICLE

@@ -37,7 +37,9 @@ if (isset($_GET['action'])) {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
             alertComment($_GET['id']);
         }
-    }
+    } elseif ($_GET['action'] == 'thankYou') {
+        thankYouView(); 
+    } 
 
     // ROUTES LOGIN / LOGOUT 
 
@@ -155,8 +157,6 @@ if (isset($_GET['action'])) {
             header("Location: http://localhost:8888/projet_4/index.php?action=login"); 
         }
     }
-}
-
-else {
+} else {
     listArticles();
 }

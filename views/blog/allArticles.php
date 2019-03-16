@@ -9,13 +9,11 @@
         <div class="navbar-header">
             <div class="logo">
                 <a href="index.php"><img src="public/images/logo_blog.png"/></a>
-                <div class="subtitle-section">
-                    <a class="subtitle" href="index.php">Retour à la page d'accueil</a>
-                </div>
             </div>
-            
         </div>
-
+        <div class="subtitle-section">
+            <a class="subtitle" href="index.php">Retour à la page d'accueil</a>
+        </div>
                
         <div class="container" id="home">
             <div>
