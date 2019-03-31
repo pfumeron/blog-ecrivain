@@ -6,12 +6,7 @@
         <link rel="stylesheet" href="public/css/style_front.css">
     </head>
     <body>
-        <div class="navbar-header">
-            <div class="logo">
-                <a href="index.php"><img src="public/images/logo_blog.png"/></a>
-            </div>
-            
-        </div>
+        <?php include 'views/layouts/header.php' ?>
                
         <div class="container" id="home"> 
         <?php $article_top = $articles->fetch() ?>       
@@ -54,9 +49,7 @@
         <div class="all-articles">
             <a href="index.php?action=home" class="btn-home-articles">Voir tous les articles</a>
         </div>
-        <footer>
-            <p>Jean Forteroche ©2019 Tous droits réservés</p>
-        </footer>
+        <?php include 'views/layouts/footer.php' ?>
 
     </body>
 </html>

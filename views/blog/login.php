@@ -6,10 +6,7 @@
         <link rel="stylesheet" href="public/css/style_front.css">
     </head>
     <body>
-        <div class="navbar-header">
-            <div class="logo">
-                <img src="public/images/logo_blog.png"/>
-            </div>
+        <?php include 'views/layouts/header.php' ?>
             
         </div>
         <div class="commment-form login">
@@ -24,7 +21,7 @@
             </form>
         </div>
        
-        
+        <?php include 'views/layouts/footer.php' ?>
         
     </body>
 </html>

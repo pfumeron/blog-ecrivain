@@ -8,11 +8,8 @@
     </head>
         
     <body class="article-view">
-        <div class="navbar-header">
-            <div class="logo">
-                <a href="index.php"><img src="public/images/logo_blog.png"/></a>
-            </div>
-        </div>
+        <?php include 'views/layouts/header.php' ?>
+
         <div class="btn-menu">
             <a href="index.php?action=home" class="btn-primary">Retour à la liste des articles</a>
         </div>
@@ -57,7 +54,7 @@
                     </div>
                 </form>
             </div>
-
+            <?php include 'views/layouts/footer.php' ?>
         </div>
     </body>
 </html>
