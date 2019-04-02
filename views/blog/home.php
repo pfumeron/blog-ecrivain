@@ -3,7 +3,10 @@
     <head>
         <title>Blog Ecrivain</title>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="public/css/style_front.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" media="screen" href="public/css/style_front.css">
+        <link rel="stylesheet" type="text/css" media="screen and (max-width: 1280px)" href="public/css/style_front_responsive.css"> 
+        
     </head>
     <body>
         <?php include 'views/layouts/header.php' ?>
@@ -32,12 +35,16 @@
             <?php $index = 0; ?>
             <?php while ($data = $articles->fetch()) { ?>
                 <?php if ($index % 3 == 0) { ?> <div class="row second-row"> <?php } ?>
-                <div class="article">
-                    <div class="article-title-background">
-                        <a href="index.php?action=getArticle&id=<?php echo $data['id'] ?>"><h3 class="article-title"><span><?php echo $data['title']; ?></span></h3></a>
-                    </div>
+                
+                    <div class="article">
+                        <a href="index.php?action=getArticle&id=<?php echo $data['id'] ?>">
+                            <div class="article-title-background">
+                            <h3 class="article-title"><span><?php echo $data['title']; ?></span></h3>
+                        </div>
+                    </a>
                     <p>Publié le <?php echo $data['creation_date'] ?></p>
-                </div>
+                    </div>
+                </a>
                 <?php $index++; ?>
                 <?php if ($index % 3 == 0) { ?> </div> <?php } ?>
             

@@ -4,9 +4,9 @@
 
 function getArticles() {
 	$db = dbConnect();
-	$req = $db->query('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date, a.article_status FROM articles AS a WHERE article_status = \'publié\' ORDER BY a.creation_date DESC LIMIT 0, 4');
+	$articles = $db->query('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date, a.article_status FROM articles AS a WHERE article_status = \'publié\' ORDER BY a.creation_date DESC LIMIT 0, 4');
 
-	return $req;
+	return $articles;
 }
 
 // DISPLAY ALL ARTICLES  
@@ -40,32 +40,29 @@ function getArticle($articleId) {
 function getArticlesAdmin($articleStatus=null) {
 	$db = dbConnect();
 	if ($articleStatus) {
-    	$req = $db->prepare('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date, a.article_status, SUM( CASE WHEN c.status = \'under_review\' THEN 1 ELSE 0 END) AS nbNewComment, COUNT(c.id) as nbTotalComments FROM articles as a LEFT JOIN comments as c ON a.id = c.article_id WHERE a.article_status = ? GROUP BY a.id ORDER BY a.creation_date DESC');
-    	$req->execute(array($articleStatus));
+    	$articles = $db->prepare('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date, a.article_status, SUM( CASE WHEN c.status = \'under_review\' THEN 1 ELSE 0 END) AS nbNewComment, COUNT(c.id) as nbTotalComments FROM articles as a LEFT JOIN comments as c ON a.id = c.article_id WHERE a.article_status = ? GROUP BY a.id ORDER BY a.creation_date DESC');
+    	$articles->execute(array($articleStatus));
 
     } else {
-    	$req = $db->query('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date, a.article_status, SUM( CASE WHEN c.status = \'under_review\' THEN 1 ELSE 0 END) AS nbNewComment, COUNT(c.id) as nbTotalComments FROM articles as a LEFT JOIN comments as c ON a.id = c.article_id GROUP BY a.id ORDER BY a.creation_date DESC');
+    	$articles = $db->query('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date, a.article_status, SUM( CASE WHEN c.status = \'under_review\' THEN 1 ELSE 0 END) AS nbNewComment, COUNT(c.id) as nbTotalComments FROM articles as a LEFT JOIN comments as c ON a.id = c.article_id GROUP BY a.id ORDER BY a.creation_date DESC');
     }
 
-	return $req;
+	return $articles;
 }
 
 function countArticles($articleStatus) {
     $db = dbConnect();
-    $req = $db->prepare('SELECT COUNT(*) as count FROM articles WHERE article_status = ?');
-    $req->execute(array($articleStatus));
+    $articles = $db->prepare('SELECT COUNT(*) as count FROM articles WHERE article_status = ?');
+    $articles->execute(array($articleStatus));
 
-    return $req->fetch();
+    return $articles->fetch();
 }
 
 function getArticleAndComment($articleId) {
     $db = dbConnect();
-    $req = $db->prepare('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date_fr, c.comment, c.author, c.status, DATE_FORMAT(c.comment_date, \'%d/%m/%Y\') AS comment_date FROM articles as a LEFT JOIN comments as c ON a.id = c.article_id WHERE a.id = ?');
-    
-    $req->execute(array($articleId));
-    $article = $req->fetch();
-
-    return $article;
+    $articles = $db->prepare('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date_fr, c.comment, c.author, c.status, DATE_FORMAT(c.comment_date, \'%d/%m/%Y\') AS comment_date FROM articles as a LEFT JOIN comments as c ON a.id = c.article_id WHERE a.id = ?');
+    $articles->execute(array($articleId));
+    return $articles->fetch();
 }
 
 function postArticle($title, $content) {

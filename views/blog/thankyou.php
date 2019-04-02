@@ -3,7 +3,9 @@
     <head>
         <title>Blog Ecrivain</title>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="public/css/style_front.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" media="screen" href="public/css/style_front.css">
+        <link rel="stylesheet" type="text/css" media="screen and (max-width: 1280px)" href="public/css/style_front_responsive.css"> 
     </head>
     <body>
         <?php include 'views/layouts/header.php' ?>
