@@ -1,13 +1,51 @@
 <?php
 
-// DISPLAY ARTICLES ON MAIN HOMEPAGE
+class Article {
+    public $id;
+    public $title;
+    public $content;
+    public $creation_date;
+    public $article_status;
 
-function getArticles() {
-	$db = dbConnect();
-	$articles = $db->query('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date, a.article_status FROM articles AS a WHERE article_status = \'publié\' ORDER BY a.creation_date DESC LIMIT 0, 4');
+    static function getLatest() // DISPLAY ARTICLES ON MAIN HOMEPAGE
+    {
+        $db = dbConnect();
+        $articles = $db->query('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date, a.article_status FROM articles AS a WHERE article_status = \'publié\' ORDER BY a.creation_date DESC LIMIT 0, 4');
+        
+        $obj_articles = [];
 
-	return $articles;
+        while ($data = $articles->fetch()) {
+
+            $new_obj_article = new Article();
+
+            $new_obj_article->id = $data['id'];
+            $new_obj_article->title = $data['title'];
+            $new_obj_article->content = $data['content'];
+            $new_obj_article->creation_date = $data['creation_date'];
+            $new_obj_article->article_status = $data['article_status'];
+
+            array_push($obj_articles, $new_obj_article);
+        }
+        $articles->closeCursor();
+
+        return $obj_articles;
+    }
+
+    static function findAll($articleStatus=null) {
+    $db = dbConnect();    
+    if ($articleStatus) {
+        $articles = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date, article_status FROM articles WHERE article_status = ? ORDER BY creation_date DESC');
+        $articles->execute(array($articleStatus));
+    } else {
+        $articles = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date, article_status FROM articles ORDER BY creation_date DESC');
+        $articles->execute();
+    }
+    return $articles;
 }
+
+}
+
+
 
 // DISPLAY ALL ARTICLES  
 
@@ -20,7 +58,6 @@ function findAllArticles($articleStatus=null) {
         $articles = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date, article_status FROM articles ORDER BY creation_date DESC');
         $articles->execute();
     }
-
     return $articles;
 }
 

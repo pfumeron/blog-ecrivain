@@ -4,7 +4,7 @@ require_once('models/index.php');
 // HOMEPAGE VIEW
 
 function listAllArticles() {
-	$articles = findAllArticles('publié');
+	$articles = Article::findAll('publié');
 	require('views/blog/allArticles.php');
 }
 
@@ -12,7 +12,7 @@ function listAllArticles() {
 
 function listArticles()
 {
-	$articles = getArticles();
+	$articles = Article::getLatest();
 	require('views//blog/home.php');
 }
 
