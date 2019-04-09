@@ -31,69 +31,69 @@ class Article {
         return $obj_articles;
     }
 
-    static function findAll($articleStatus=null) {
+    static function findAll($articleStatus=null) { // DISPLAY ALL ARTICLES ON HOME BLOG PAGE
     $db = dbConnect();    
     if ($articleStatus) {
-        $articles = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date, article_status FROM articles WHERE article_status = ? ORDER BY creation_date DESC');
+        $articles = $db->prepare('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date, a.article_status, SUM( CASE WHEN c.status = \'under_review\' THEN 1 ELSE 0 END) AS nbNewComment, COUNT(c.id) as nbTotalComments FROM articles as a LEFT JOIN comments as c ON a.id = c.article_id WHERE a.article_status = ? GROUP BY a.id ORDER BY a.creation_date DESC');
         $articles->execute(array($articleStatus));
     } else {
-        $articles = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date, article_status FROM articles ORDER BY creation_date DESC');
+        $articles = $db->query('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date, a.article_status, SUM( CASE WHEN c.status = \'under_review\' THEN 1 ELSE 0 END) AS nbNewComment, COUNT(c.id) as nbTotalComments FROM articles as a LEFT JOIN comments as c ON a.id = c.article_id GROUP BY a.id ORDER BY a.creation_date DESC');
         $articles->execute();
     }
-    return $articles;
-}
 
-}
+    $obj_articles = [];
 
+        while ($data = $articles->fetch()) {
 
+            $new_obj_article = new Article();
 
-// DISPLAY ALL ARTICLES  
+            $new_obj_article->id = $data['id'];
+            $new_obj_article->title = $data['title'];
+            $new_obj_article->content = $data['content'];
+            $new_obj_article->creation_date = $data['creation_date'];
+            $new_obj_article->article_status = $data['article_status'];
 
-function findAllArticles($articleStatus=null) {
-    $db = dbConnect();    
-    if ($articleStatus) {
-        $articles = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date, article_status FROM articles WHERE article_status = ? ORDER BY creation_date DESC');
+            array_push($obj_articles, $new_obj_article);
+        }
+        $articles->closeCursor();
+
+        return $obj_articles;
+
+    }
+
+    static function get($articleId) { // DISPLAY SPECIFIC ARTICLE PAGE ON BLOG
+    $db = dbConnect();
+    $articles = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date FROM articles WHERE id = ?');
+    $articles->execute(array($articleId));
+    
+    $obj_article = null;
+
+        while ($data = $articles->fetch()) {
+
+            $obj_article = new Article();
+
+            $obj_article->id = $data['id'];
+            $obj_article->title = $data['title'];
+            $obj_article->content = $data['content'];
+            $obj_article->creation_date = $data['creation_date'];
+        }
+        $articles->closeCursor();
+
+        return $obj_article;
+    }
+
+    static function count($articleStatus) {
+        $db = dbConnect();
+        $articles = $db->prepare('SELECT COUNT(*) as count FROM articles WHERE article_status = ?');
         $articles->execute(array($articleStatus));
-    } else {
-        $articles = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date, article_status FROM articles ORDER BY creation_date DESC');
-        $articles->execute();
-    }
-    return $articles;
-}
-
-// DISPLAY SPECIFIC ARTICLE PAGE ON BLOG
-
-function getArticle($articleId) {
-    $db = dbConnect();
-    $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date_fr FROM articles WHERE id = ?');
-    $req->execute(array($articleId));
-    $article = $req->fetch();
-
-    return $article;
-}
-
-// DISPLAY ARTICLES ON THE ADMIN
-
-function getArticlesAdmin($articleStatus=null) {
-	$db = dbConnect();
-	if ($articleStatus) {
-    	$articles = $db->prepare('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date, a.article_status, SUM( CASE WHEN c.status = \'under_review\' THEN 1 ELSE 0 END) AS nbNewComment, COUNT(c.id) as nbTotalComments FROM articles as a LEFT JOIN comments as c ON a.id = c.article_id WHERE a.article_status = ? GROUP BY a.id ORDER BY a.creation_date DESC');
-    	$articles->execute(array($articleStatus));
-
-    } else {
-    	$articles = $db->query('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date, a.article_status, SUM( CASE WHEN c.status = \'under_review\' THEN 1 ELSE 0 END) AS nbNewComment, COUNT(c.id) as nbTotalComments FROM articles as a LEFT JOIN comments as c ON a.id = c.article_id GROUP BY a.id ORDER BY a.creation_date DESC');
+        $data = $articles->fetch();
+        return $data["count"];
     }
 
-	return $articles;
 }
 
-function countArticles($articleStatus) {
-    $db = dbConnect();
-    $articles = $db->prepare('SELECT COUNT(*) as count FROM articles WHERE article_status = ?');
-    $articles->execute(array($articleStatus));
 
-    return $articles->fetch();
-}
+
 
 function getArticleAndComment($articleId) {
     $db = dbConnect();

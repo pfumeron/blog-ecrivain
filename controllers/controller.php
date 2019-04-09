@@ -20,7 +20,7 @@ function listArticles()
 
 function listArticleAndComment($articleId)
 {
-    $article = getArticle($articleId);
+    $article = Article::get($articleId);
     $comments = getComments($articleId,'validated');
     require('views/blog/articleView.php');
 }

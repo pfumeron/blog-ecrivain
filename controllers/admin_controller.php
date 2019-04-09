@@ -23,10 +23,10 @@ function login($email, $password){
 }
 
 function adminArticles($articleStatus=null){
-	$articles = getArticlesAdmin($articleStatus);
-	$nbPublishedArticles = countArticles('publié');
-	$nbDraftArticles = countArticles('brouillon');
-	$nbTotalArticles = $nbPublishedArticles['count'] + $nbDraftArticles['count'];
+	$articles = Article::findAll($articleStatus);
+	$nbPublishedArticles = Article::count('publié');
+	$nbDraftArticles = Article::count('brouillon');
+	$nbTotalArticles = $nbPublishedArticles + $nbDraftArticles;
 
 	require('views/admin/articleView.php');
 }

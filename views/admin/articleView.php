@@ -34,7 +34,7 @@
         
 	    <div class="row">
 	        <h2 class="box-title">Articles</h2>
-        	<p><a href="index.php?action=adminArticles">Tous (<?php echo $nbTotalArticles ?>)</a> | <a href="index.php?action=adminArticles&status=published">Publiés (<?php echo $nbPublishedArticles['count']; ?>)</a> | <a href="index.php?action=adminArticles&status=draft">Brouillons (<?php echo $nbDraftArticles['count']; ?>)</a></p>
+        	<p><a href="index.php?action=adminArticles">Tous (<?php echo $nbTotalArticles ?>)</a> | <a href="index.php?action=adminArticles&status=published">Publiés (<?php echo $nbPublishedArticles; ?>)</a> | <a href="index.php?action=adminArticles&status=draft">Brouillons (<?php echo $nbDraftArticles; ?>)</a></p>
             <div>
 		        <table class="table-admin">
 		        	<thead>
@@ -56,29 +56,25 @@
 		        	</thead>
 		        	<tbody>
 
-		        	<?php
-			        while ($article = $articles->fetch())
-			        {
+		        	<?php for ($i=1; $i < sizeof($articles); $i++) {
 			        ?>
 		        		<tr class="table-content">
-		        			<td><?php echo $article['creation_date']; ?></td>
-		        			<td><?php echo htmlspecialchars($article['title']); ?></td>
-		        			<td class="<?php echo $article['article_status']; ?>-status"><span><?php echo $article['article_status']; ?></span></td>
-		        			<td><a class="btn-new-comment" href="index.php?action=adminGetArticle&id=<? echo $article['id'] ?>"><?php echo $article['nbNewComment']; ?></a></td>
-							<td><?php echo $article['nbTotalComments']; ?></td>
-		        			<td class="<?php echo $article['article_status']; ?>" >
-		        				<a class="btn-publish" href="index.php?action=publishArticle&id=<?php echo $article['id'] ?>">Publier |</a>  
-								<a class="btn-modify" href="index.php?action=editArticle&id=<?php echo $article['id'] ?>">Modifier</a> | 
-								<a class="btn-delete" href="index.php?action=deleteArticle&id=<?php echo $article['id'] ?>">Supprimer</a>
+		        			<td><?php echo $articles[$i]->creation_date; ?></td>
+		        			<td><?php echo htmlspecialchars($articles[$i]->title); ?></td>
+		        			<td class="<?php echo $article[$i]->article_status; ?>-status"><span><?php echo $articles[$i]->article_status; ?></span></td>
+		        			<td><a class="btn-new-comment" href="index.php?action=adminGetArticle&id=<? echo $articles[$i]->id ?>"><?php echo $articles[$i]->nbNewComment; ?></a></td>
+		        			<td>Nb signalés</td>
+							<td><?php echo $articles[$i]->nbTotalComments; ?></td>
+		        			<td class="<?php echo $articles[$i]->article_status; ?>" >
+		        				<a class="btn-publish" href="index.php?action=publishArticle&id=<?php echo $articles[$i]->id ?>">Publier |</a>  
+								<a class="btn-modify" href="index.php?action=editArticle&id=<?php echo $articles[$i]->id ?>">Modifier</a> | 
+								<a class="btn-delete" href="index.php?action=deleteArticle&id=<?php echo $articles[$i]->id ?>">Supprimer</a>
 							</td>
 							
 							
 		        			
 		        		</tr>
-		        	<?php
-			        }
-			        $articles->closeCursor();
-			        ?>
+		        	<?php } ?>
 		        	</tbody>
 		    	</table>
 			</div>

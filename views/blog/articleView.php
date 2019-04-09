@@ -18,11 +18,11 @@
         <div class="container" id="article-page">
             <div class="content-article">
                 <div class="content-article-title">
-                    <h3><?= htmlspecialchars($article['title']) ?></h3>
+                    <h3><?= htmlspecialchars($article->title) ?></h3>
                 </div>
-                <p class="date">Publié le <? echo $article['creation_date_fr'] ?></p>
+                <p class="date">Publié le <? echo $article->creation_date ?></p>
                 
-                <p class="text-article"><?= $article['content'] ?></p>
+                <p class="text-article"><?= $article->content ?></p>
             </div>
             
             

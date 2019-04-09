@@ -20,18 +20,18 @@
             </div>
 
             <?php $index = 0; ?>
-            <?php while ($data = $articles->fetch()) { ?>
+            <?php for ($i=0; $i < sizeof($articles); $i++)   {?>
                 <?php if ($index % 3 == 0) { ?> <div class="row second-row"> <?php } ?>
                 <div class="article">
                     <div class="article-title-background">
-                        <a href="index.php?action=getArticle&id=<?php echo $data['id'] ?>"><h3 class="article-title"><span><?php echo $data['title']; ?></span></h3></a>
+                        <a href="index.php?action=getArticle&id=<?php echo $articles[$i]->id ?>"><h3 class="article-title"><span><?php echo $articles[$i]->title; ?></span></h3></a>
                     </div>
-                    <p>Publié le <?php echo $data['creation_date'] ?></p>
+                    <p>Publié le <?php echo $articles[$i]->creation_date ?></p>
                 </div>
                 <?php $index++; ?>
                 <?php if ($index % 3 == 0) { ?> </div> <?php } ?>
             
-            <?php } $articles->closeCursor(); ?>
+            <?php }  ?>
             
 
 
