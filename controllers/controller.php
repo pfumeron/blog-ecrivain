@@ -21,7 +21,7 @@ function listArticles()
 function listArticleAndComment($articleId)
 {
     $article = Article::get($articleId);
-    $comments = getComments($articleId,'validated');
+    $comments = Comment::get($articleId,'validated');
     require('views/blog/articleView.php');
 }
 
@@ -29,7 +29,7 @@ function listArticleAndComment($articleId)
 
 function addComment($articleId, $author, $comment)
 {
-    $affectedLines = postComment($articleId, $author, $comment);
+    $affectedLines = Comment::post($articleId, $author, $comment);
 
     if ($affectedLines === false) {
         die('Impossible d\'ajouter le commentaire !');
@@ -48,6 +48,6 @@ function thankYouView() {
 // FLAG COMMENT ON A ARTICLE
 
 function alertComment($articleId){
-	flagComment($articleId);
+	Comment::flag($articleId);
 	header("Location: http://localhost:8888/projet_4/index.php?action=getArticle&id=" . $_GET['articleId']);
 }

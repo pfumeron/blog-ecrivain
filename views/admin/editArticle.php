@@ -31,15 +31,15 @@
 			<a class="btn-view-admin top-right" href="index.php?action=adminArticles">Retour</a>
 		</div>
   		<div class="row">
-			<h2 class="admin-title">Écrire un nouvel article</h2>
+			<h2 class="admin-title">Modifier un article</h2>
             <div class="commment-form">
-		        <form class="form" action="index.php?action=updateArticle&id=<?php echo $article['id'] ?>" method="post">
+		        <form class="form" action="index.php?action=updateArticle&id=<?php echo $article->id ?>" method="post">
 			            <label for="title"> Titre </label><br />
-		        		<input class="form-control" type="text" id="title" name="title" value="<?php echo htmlspecialchars($article['title']); ?>" />
+		        		<input class="form-control" type="text" id="title" name="title" value="<?= htmlspecialchars($article->title) ?>" />
 			        <div>
 			        	<label for="content">Contenu de l'article</label><br />
 			        	<textarea id="content" name="content">
-						<?php echo $article['content']; ?>
+						<?php echo $article->content; ?>
 						</textarea>
 					</div>
 					<div>

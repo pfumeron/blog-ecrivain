@@ -40,19 +40,19 @@
                         echo $alert; 
                     }
                     ?>
-                    <h3><?= htmlspecialchars($article['title']) ?></h3>
+                    <h3><?= htmlspecialchars($article->title) ?></h3>
                 </div>
-                <p class="date">Publié le <? echo $article['creation_date_fr'] ?></p>
+                <p class="date">Publié le <? echo $article->creation_date ?></p>
                 
-                <p class="text-article"><?= $article['content'] ?></p>
+                <p class="text-article"><?= $article->content ?></p>
             </div>
             
             <div class="comment-list">
-                <?php while ($comment = $comments->fetch()) { ?>
-                    <p class="comment-reviewed"><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
-                    <p class="comment-info">Ajouté par <?= htmlspecialchars($comment['author']) ?>, le <?= $comment['comment_date'] ?></p>
-                    <a class="btn-comments" href="index.php?action=validComment&articleId=<?php echo $comment['article_id'] ?>&id=<?php echo $comment['id'] ?>">Valider</a> 
-                    <a class="btn-comments" href="index.php?action=deleteComment&articleId=<?php echo $comment['article_id'] ?>&id=<?php echo $comment['id'] ?>">Supprimer</a>
+                <?php for ($i=0; $i < sizeof($comments); $i++) { ?>
+                    <p class="comment-reviewed"><?= nl2br(htmlspecialchars($comments[$i]->comment)) ?></p>
+                    <p class="comment-info">Ajouté par <?= htmlspecialchars($comments[$i]->author) ?>, le <?= $comments[$i]->comment_date ?></p>
+                    <a class="btn-comments" onClick="javascript: return confirm('Voulez-vous publier ce commentaire ?');" href="index.php?action=validComment&articleId=<?php echo $comments[$i]->article_id ?>&id=<?php echo $comments[$i]->id ?>">Valider</a> 
+                    <a class="btn-comments" onClick="javascript: return confirm('Voulez-vous supprimer ce commentaire ? Cette action est définitive');" href="index.php?action=deleteComment&articleId=<?php echo $comments[$i]->article_id ?>&id=<?php echo $comments[$i]->id ?>">Supprimer</a>
                 <?php
                 }
                 ?>

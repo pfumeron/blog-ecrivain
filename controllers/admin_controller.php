@@ -10,7 +10,7 @@ function loginView() {
 }
 
 function login($email, $password){
-	$adminlogged = logAdmin($email,$password);
+	$adminlogged = Admin::exists($email,$password);
 	if (isset($adminlogged)) {
         session_start();
         $_SESSION['id'] = $adminlogged['id'];
@@ -32,20 +32,20 @@ function adminArticles($articleStatus=null){
 }
 
 function showArticleWithComments($articleId) {
-	$article = getArticle($articleId);
-	$comments = getComments($articleId,'under_review');
+	$article = Article::get($articleId);
+	$comments = Comment::get($articleId,'under_review');
 	require('views/admin/pageViewComments.php');
 }
 
 // COMMENTS ADMINISTRATION
 
 function validComment($articleId){
-	updateComment($articleId);
+	Comment::update($articleId);
 	header("Location: http://localhost:8888/projet_4/index.php?action=adminGetArticle&id=" . $_GET['articleId']);
 }
 
 function deleteComment($articleId){
-	removeComment($articleId);
+	Comment::remove($articleId);
 	header("Location: http://localhost:8888/projet_4/index.php?action=adminGetArticle&id=" . $_GET['articleId']);
 }
 
@@ -56,27 +56,27 @@ function newArticle() {
 }
 
 function createArticle($title, $content){
-	postArticle($title, $content);
+	Article::post($title, $content);
 	header('Location: http://localhost:8888/projet_4/index.php?action=adminArticles');
 }
 
 function publishArticle($articleId){
-	validateArticle($articleId);
+	Article::validate($articleId);
 	header('Location: http://localhost:8888/projet_4/index.php?action=adminArticles');
 }
 
 function deleteArticle($articleId) {
-	removeArticle($articleId);
+	Article::remove($articleId);
 	header('Location: http://localhost:8888/projet_4/index.php?action=adminArticles');
 }
 
 function editArticle($articleId) {
-	$article = getArticle($articleId);
+	$article = Article::get($articleId);
 	require('views/admin/editArticle.php');
 }
 
 function updateArticle() {
-	updateArticles($_GET['id'], ['title' => $_POST['title'], 'content' => $_POST['content']]);
+	Article::update($_GET['id'], ['title' => $_POST['title'], 'content' => $_POST['content']]);
 	header('Location: http://localhost:8888/projet_4/index.php?action=adminArticles');
 }
 

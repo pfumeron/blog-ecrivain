@@ -31,7 +31,7 @@ class Article {
         return $obj_articles;
     }
 
-    static function findAll($articleStatus=null) { // DISPLAY ALL ARTICLES ON HOME BLOG PAGE
+    static function findAll($articleStatus=null) { // DISPLAY ALL ARTICLES ON HOME BLOG PAGE & ADMIN
     $db = dbConnect();    
     if ($articleStatus) {
         $articles = $db->prepare('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date, a.article_status, SUM( CASE WHEN c.status = \'under_review\' THEN 1 ELSE 0 END) AS nbNewComment, COUNT(c.id) as nbTotalComments FROM articles as a LEFT JOIN comments as c ON a.id = c.article_id WHERE a.article_status = ? GROUP BY a.id ORDER BY a.creation_date DESC');
@@ -52,6 +52,8 @@ class Article {
             $new_obj_article->content = $data['content'];
             $new_obj_article->creation_date = $data['creation_date'];
             $new_obj_article->article_status = $data['article_status'];
+            $new_obj_article->nbNewComment = $data['nbNewComment'];
+            $new_obj_article->nbTotalComments = $data['nbTotalComments'];
 
             array_push($obj_articles, $new_obj_article);
         }
@@ -90,41 +92,28 @@ class Article {
         return $data["count"];
     }
 
+    static function post($title, $content) {
+        $db = dbConnect();
+        $draftArticle = $db->prepare('INSERT INTO articles(title, content, creation_date) VALUES(?, ?, NOW())');
+        $draftArticle->execute(array($title, $content));    
+    }
+
+    static function validate($articleId) {
+        $db = dbConnect();
+        $articleStatus = $db->prepare('UPDATE articles SET article_status = \'publié\' WHERE id = ?');
+        $articleStatus->execute(array($articleId));
+    }
+
+    static function update($articleId, $values) {
+        $db = dbConnect();
+        $modifiedArticle = $db->prepare('UPDATE articles SET title = ?, content = ? WHERE id = ? ');
+        $modifiedArticle->execute(array($values['title'], $values['content'],  $articleId));
+    }
+
+    static function remove($articleId) {
+        $db = dbConnect();
+        $article = $db->prepare('DELETE FROM articles WHERE id = ?');
+        $article->execute(array($articleId));
+    }
+
 }
-
-
-
-
-function getArticleAndComment($articleId) {
-    $db = dbConnect();
-    $articles = $db->prepare('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date_fr, c.comment, c.author, c.status, DATE_FORMAT(c.comment_date, \'%d/%m/%Y\') AS comment_date FROM articles as a LEFT JOIN comments as c ON a.id = c.article_id WHERE a.id = ?');
-    $articles->execute(array($articleId));
-    return $articles->fetch();
-}
-
-function postArticle($title, $content) {
-	$db = dbConnect();
-    $draftArticle = $db->prepare('INSERT INTO articles(title, content, creation_date) VALUES(?, ?, NOW())');
-    $draftArticle->execute(array($title, $content));	 
-}
-
-function validateArticle($articleId) {
-    $db = dbConnect();
-    $articleStatus = $db->prepare('UPDATE articles SET article_status = \'publié\' WHERE id = ?');
-    $articleStatus->execute(array($articleId));
-}
-
-function updateArticles($articleId, $values) {
-	$db = dbConnect();
-	$modifiedArticle = $db->prepare('UPDATE articles SET title = ?, content = ? WHERE id = ? ');
-	$modifiedArticle->execute(array($values['title'], $values['content'],  $articleId));
-}
-
-function removeArticle($articleId) {
-    $db = dbConnect();
-    $comments = $db->prepare('DELETE FROM articles WHERE id = ?');
-    $comments->execute(array($articleId));
-}
-
-
-
