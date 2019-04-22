@@ -11,12 +11,10 @@
         <?php include 'views/layouts/header.php' ?>
         <div class="subtitle-section">
             <a class="subtitle" href="index.php">Retour à la page d'accueil</a>
-        </div>
-               
+        </div>       
         <div class="container" id="home">
             <div>
-                <h2 class="main-title">Tous les articles</h2>
-                
+                <h2 class="main-title">Tous les articles</h2>               
             </div>
 
             <?php $index = 0; ?>
@@ -32,12 +30,7 @@
                 <?php if ($index % 3 == 0) { ?> </div> <?php } ?>
             
             <?php }  ?>
-            
-
-
         </div>
-        
         <?php include 'views/layouts/footer.php' ?>
-
     </body>
 </html>

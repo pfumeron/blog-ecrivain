@@ -25,7 +25,6 @@
                 <p class="text-article"><?= $article->content ?></p>
             </div>
             
-            
             <div class="comment-list">
                 <h4>Commentaires</h4>
                 <?php for ($i=0; $i < sizeof($comments); $i++) { ?>
@@ -40,7 +39,6 @@
     
             <div class="commment-form">
                 <h4>Ajouter un commentaire</h4>
-
                 <form action="index.php?action=addComment&amp;id=<?= $article->id ?>" method="post">
                     <div>
                         <label for="author">Votre nom</label><br />

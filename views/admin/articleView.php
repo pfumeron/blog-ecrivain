@@ -35,7 +35,11 @@
         
 	    <div class="row">
 	        <h2 class="box-title">Articles</h2>
-        	<p><a href="index.php?action=adminArticles">Tous (<?php echo $nbTotalArticles ?>)</a> | <a href="index.php?action=adminArticles&status=published">Publiés (<?php echo $nbPublishedArticles; ?>)</a> | <a href="index.php?action=adminArticles&status=draft">Brouillons (<?php echo $nbDraftArticles; ?>)</a></p>
+        	<p>
+        		<a href="index.php?action=adminArticles">Tous (<?php echo $nbTotalArticles ?>)</a> |
+        		<a href="index.php?action=adminArticles&status=published">Publiés (<?php echo $nbPublishedArticles; ?>)</a> |
+        		<a href="index.php?action=adminArticles&status=draft">Brouillons (<?php echo $nbDraftArticles; ?>)</a>
+        	</p>
             <div>
 		        <table class="table-admin">
 		        	<thead>
@@ -58,7 +62,7 @@
 		        	</thead>
 		        	<tbody>
 
-		        	<?php for ($i=1; $i < sizeof($articles); $i++) {
+		        	<?php for ($i=0; $i < sizeof($articles); $i++) {
 			        ?>
 		        		<tr class="table-content">
 		        			<td><?php echo $articles[$i]->creation_date; ?></td>
@@ -72,9 +76,6 @@
 								<a class="btn-modify" href="index.php?action=editArticle&id=<?php echo $articles[$i]->id ?>">Modifier</a> | 
 								<a class="btn-delete" onClick="javascript: return confirm('Voulez-vous vraiment supprimer cet article ? Cette action est définitive');" href="index.php?action=deleteArticle&id=<?php echo $articles[$i]->id ?>">Supprimer</a>
 							</td>
-							
-							
-		        			
 		        		</tr>
 		        	<?php } ?>
 		        	</tbody>
