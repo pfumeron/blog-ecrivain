@@ -8,7 +8,8 @@ function dbConnect()
 {
     try
     {   
-        $dbopts = parse_url(getenv('DATABASE_URL'));
+        $dbopts = parse_url(getenv('CLEARDB_DATABASE_URL'));
+
         $db = new PDO($dbopts['scheme'].':host='.$dbopts['host'].';dbname='.ltrim($dbopts["path"],'/').';',$dbopts['user'],$dbopts['pass']);
         return $db;
     }

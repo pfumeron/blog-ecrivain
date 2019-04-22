@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+
+@media all and (max-width: 600px) {
+
+.first-row {
+	display: flex;
+	flex-direction: column;
+}
+
+.featured-image {
+	background-image: url("../images/featured-image.jpeg");
+	background-repeat: no-repeat;
+  	background-size: cover;
+	width: 100%;
+	border-radius: 4px;
+	margin-bottom: 20px;
+}
+
+.featured-article {
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 300px;
+    width: 80%;
+    margin: 0 15px 0px 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.featured-title span {
+    display: block;
+    font-family: "Josefin Sans","Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 22px;
+    color: #ffffff;
+    padding: 40px 10px 0px 0px;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 35px;
+
+}
+
+.btn-featured {
+    border: solid 1px #ffffff;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-left: 20px;
+    color: #ffffff;
+    display: inline-block;
+    margin-top: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+
+.featured-article p {
+    padding-left: 20px;
+    font-size: 14px;
+    color: #ffffff;
+    margin: 0;
+}
+
+.about-me {
+	border: solid 3px #005574;
+	width: 100%;
+	border-radius: 4px;
+}
+
+.about-me img {
+    border-radius: 50%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.about-me p {
+    margin: auto;
+    text-align: left;
+    font-size: 14px;
+    padding: 10px;
+    text-align: center;
+}
+
+.row.second-row {
+	display: flex;
+	flex-direction: column;
+}
+
+.article {
+    background-color: #06B3B8;
+    margin-top: 10px;
+    height: 300px;
+    border-radius: 4px;
+    transition: transform .2s;
+    min-width: 100%;
+}
+
+.article-title-background {
+    background-color: #fef600;
+    line-height: 10px;
+    margin: 40px 0px 20px 10px;
+    width: 80%;
+}
+
+.article-title span {
+    font-family: "Josefin Sans","Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 22px;
+    padding: 5px 10px 5px 10px;
+    color: #005574;
+}
+
+.article p {
+    margin: 0 0 0 20px;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.btn-home-articles {
+    border: solid 1px #005574;
+    border-radius: 5px;
+    padding: 15px 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+
+.content-article h3 {
+    display: block;
+    font-family: "Josefin Sans","Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #005574;
+    font-size: 26px;
+    margin: 0px;
+    line-height: 22px;
+}
+
+input[type=text], textarea, input[type=password] {
+	padding: 5px 0;
+	width:100%;
+	border-radius: 4px;
+	font-size: 20px;
+	margin:10px 0;
+}
+
+.text-article {
+    font-size: 14px;
+}
+
+}
+
+@media all and (min-width: 601px) and (max-width: 1024px) {
+
+}
