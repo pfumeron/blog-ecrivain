@@ -35,7 +35,7 @@ function addComment($articleId, $author, $comment)
         die('Impossible d\'ajouter le commentaire !');
     }
     else {
-        header('Location: http://localhost:8888/projet_4/index.php?action=thankYou');
+        header("Location: ".getenv('HOSTNAME')."/index.php?action=thankYou");
     }
 }
 
@@ -49,5 +49,5 @@ function thankYouView() {
 
 function alertComment($articleId){
 	Comment::flag($articleId);
-	header("Location: http://localhost:8888/projet_4/index.php?action=getArticle&id=" . $_GET['articleId']);
+	header("Location: ".getenv('HOSTNAME')."/index.php?action=getArticle&id=" . $_GET['articleId']);
 }

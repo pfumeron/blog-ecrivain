@@ -15,10 +15,10 @@ function login($email, $password){
         session_start();
         $_SESSION['id'] = $adminlogged['id'];
         
-		header('Location: http://localhost:8888/projet_4/index.php?action=adminArticles');
+		header("Location: ".getenv('HOSTNAME')."/index.php?action=adminArticles");
 	} else {
     	echo 'Mauvais identifiant ou mot de passe !';
-		header('Location: http://localhost:8888/projet_4/index.php?action=login');
+		header("Location: ".getenv('HOSTNAME')."/index.php?action=login");
 	}
 }
 
@@ -41,12 +41,12 @@ function showArticleWithComments($articleId) {
 
 function validComment($articleId){
 	Comment::update($articleId);
-	header("Location: http://localhost:8888/projet_4/index.php?action=adminGetArticle&id=" . $_GET['articleId']);
+	header("Location: ".getenv('HOSTNAME')."/index.php?action=adminGetArticle&id=" . $_GET['articleId']);
 }
 
 function deleteComment($articleId){
 	Comment::remove($articleId);
-	header("Location: http://localhost:8888/projet_4/index.php?action=adminGetArticle&id=" . $_GET['articleId']);
+	header("Location: ".getenv('HOSTNAME')."/index.php?action=adminGetArticle&id=" . $_GET['articleId']);
 }
 
 // ARTICLES ADMINISTRATION
@@ -57,17 +57,17 @@ function newArticle() {
 
 function createArticle($title, $content){
 	Article::post($title, $content);
-	header('Location: http://localhost:8888/projet_4/index.php?action=adminArticles');
+	header("Location: ".getenv('HOSTNAME')."/index.php?action=adminArticles");
 }
 
 function publishArticle($articleId){
 	Article::validate($articleId);
-	header('Location: http://localhost:8888/projet_4/index.php?action=adminArticles');
+	header("Location: ".getenv('HOSTNAME')."/index.php?action=adminArticles");
 }
 
 function deleteArticle($articleId) {
 	Article::remove($articleId);
-	header('Location: http://localhost:8888/projet_4/index.php?action=adminArticles');
+	header("Location: ".getenv('HOSTNAME')."/index.php?action=adminArticles");
 }
 
 function editArticle($articleId) {
@@ -77,7 +77,7 @@ function editArticle($articleId) {
 
 function updateArticle() {
 	Article::update($_GET['id'], ['title' => $_POST['title'], 'content' => $_POST['content']]);
-	header('Location: http://localhost:8888/projet_4/index.php?action=adminArticles');
+	header("Location: ".getenv('HOSTNAME')."/index.php?action=adminArticles");
 }
 
 ?>
