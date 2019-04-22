@@ -52,7 +52,7 @@ if (isset($_GET['action'])) {
     elseif ($_GET['action'] == 'logout') {
         session_start();
         session_destroy();
-        header("Location: http://localhost:8888/projet_4/index.php?action=login"); 
+        header("Location: ".getenv('HOSTNAME')."/index.php?action=login"); 
     }
 
     // ROUTES BLOG ADMIN
@@ -68,7 +68,7 @@ if (isset($_GET['action'])) {
                 adminArticles();
             }
         } else {  
-            header("Location: http://localhost:8888/projet_4/index.php?action=login"); 
+            header("Location: ".getenv('HOSTNAME')."/index.php?action=login"); 
         }
     }
     elseif ($_GET['action'] == 'adminGetArticle') {
@@ -80,7 +80,7 @@ if (isset($_GET['action'])) {
                 echo 'Erreur : aucun identifiant de billet envoyé';
             }
         } else {  
-            header("Location: http://localhost:8888/projet_4/index.php?action=login"); 
+            header("Location: ".getenv('HOSTNAME')."/index.php?action=login"); 
         }
     }
     elseif ($_GET['action'] == 'createArticle') {
@@ -93,7 +93,7 @@ if (isset($_GET['action'])) {
                     echo 'Erreur : tous les champs ne sont pas remplis !';
             }
         } else {  
-            header("Location: http://localhost:8888/projet_4/index.php?action=login"); 
+            header("Location: ".getenv('HOSTNAME')."/index.php?action=login"); 
         }
     }
     elseif ($_GET['action'] == 'newArticle') {
@@ -101,7 +101,7 @@ if (isset($_GET['action'])) {
         if (isset($_SESSION['id'])){
             newArticle();
         } else {  
-            header("Location: http://localhost:8888/projet_4/index.php?action=login"); 
+            header("Location: ".getenv('HOSTNAME')."/index.php?action=login"); 
         }
     }
     elseif ($_GET['action'] == 'publishArticle') {
@@ -109,7 +109,7 @@ if (isset($_GET['action'])) {
         if (isset($_SESSION['id'])){
             publishArticle($_GET['id']);
         } else {  
-            header("Location: http://localhost:8888/projet_4/index.php?action=login"); 
+            header("Location: ".getenv('HOSTNAME')."/index.php?action=login"); 
         }
     }
 
@@ -122,7 +122,7 @@ if (isset($_GET['action'])) {
                 echo 'Erreur : aucun identifiant de billet envoyé';
             }
         } else {  
-            header("Location: http://localhost:8888/projet_4/index.php?action=login"); 
+            header("Location: ".getenv('HOSTNAME')."/index.php?action=login"); 
         }
     }
     elseif ($_GET['action'] == 'updateArticle') {
@@ -130,7 +130,7 @@ if (isset($_GET['action'])) {
         if (isset($_SESSION['id'])){    
             updateArticle($_GET['id']);
         } else {  
-            header("Location: http://localhost:8888/projet_4/index.php?action=login"); 
+            header("Location: ".getenv('HOSTNAME')."/index.php?action=login"); 
         }    
     }
     elseif ($_GET['action'] == 'validComment') {
@@ -138,7 +138,7 @@ if (isset($_GET['action'])) {
         if (isset($_SESSION['id'])){
             validComment($_GET['id']);
         } else {  
-            header("Location: http://localhost:8888/projet_4/index.php?action=login"); 
+            header("Location: ".getenv('HOSTNAME')."/index.php?action=login"); 
         } 
     }
     elseif ($_GET['action'] == 'deleteComment') {
@@ -146,7 +146,7 @@ if (isset($_GET['action'])) {
         if (isset($_SESSION['id'])){
             deleteComment();
         } else {  
-            header("Location: http://localhost:8888/projet_4/index.php?action=login"); 
+            header("Location: ".getenv('HOSTNAME')."/index.php?action=login"); 
         } 
     }
     elseif ($_GET['action'] == 'deleteArticle') {
@@ -154,7 +154,7 @@ if (isset($_GET['action'])) {
         if (isset($_SESSION['id'])){
             deleteArticle($_GET['id']);
         } else {  
-            header("Location: http://localhost:8888/projet_4/index.php?action=login"); 
+            header("Location: ".getenv('HOSTNAME')."/index.php?action=login"); 
         }
     }
 } else {
