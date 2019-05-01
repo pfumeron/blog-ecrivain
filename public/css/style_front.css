@@ -296,7 +296,7 @@ footer p {
 	padding: 10px 10px 0px 20px;
 }
 
-input[type=email], textarea, input[type=password] {
+input[type=email], input[type=text], textarea, input[type=password] {
 	padding: 5px 0;
 	width: 50%;
 	border-radius: 4px;
