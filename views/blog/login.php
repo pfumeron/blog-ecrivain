@@ -19,9 +19,9 @@
             
             <form action="index.php?action=loginVerify" method="post">
                 <label for="email">Votre email</label><br />
-                <input type=email name="email"><br />
+                <input type=email id="email" name="email"><br />
                 <label for="email">Votre mot de passe</label><br />
-                <input type="password" name="password" />
+                <input type="password" id="password" name="password" />
                 <input type="submit" id ="submit-login" value="Valider" />
                 
             </form>
