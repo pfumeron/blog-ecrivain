@@ -15,23 +15,23 @@ body {
 	padding: 30px;
 }
 
-.navbar-header .logo {
+nav .logo {
 	text-align: center;
 	margin:10px;
 }
 
-.navbar-header ul {
+nav ul {
 	padding: 0;
 	text-align: center;
 }
 
-.navbar-header li {
+nav li {
 	list-style: none;
 	display: inline;
 	padding: 10px;
 }
 
-.navbar-header a {
+nav a {
 	text-decoration: none;
 }
 

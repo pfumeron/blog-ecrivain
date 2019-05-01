@@ -1,6 +1,7 @@
-<div class="navbar-header">
+<nav>
     <div class="logo">
-        <a href="index.php"><img alt="logo" src="public/images/logo_blog.png"/></a>
-    </div>
-            
-</div>
+        <a href="index.php">
+        	<img alt="logo" src="public/images/logo_blog.png">
+        </a>
+    </div>            
+</nav>
