@@ -10,7 +10,7 @@
     <body>
         <?php include 'views/layouts/header.php' ?>      
         <div class="container" id="home"> 
-        <?php $article_top = $articles[0] ?>  
+            <?php $article_top = $articles[0] ?>  
             <div class="row first-row">
                 <div class="featured-image">
                     <div class="featured-article">
@@ -35,8 +35,8 @@
             </div>
             <?php $index = 0; ?>
             <?php for ($i=1; $i < sizeof($articles); $i++) { ?>
-                <?php if ($index % 3 == 0) { ?> 
-                <div class="row second-row"> <?php } ?>
+                
+                <?php if ($index % 3 == 0) { ?> <div class="row second-row"> <?php } ?>
                     <div class="article">
                         <a href="index.php?action=getArticle&id=<?php echo $articles[$i]->id ?>">
                             <div class="article-title-background">
@@ -45,11 +45,13 @@
                         </a>
                         <p>Publié le <?php echo $articles[$i]->creation_date ?></p>
                     </div>
-                <?php $index++; ?>
-                <?php if ($index % 3 == 0) { ?> 
-                </div> <?php } ?>
-            <?php }  ?>
+                <?php if ($index % 3 == 0) { ?> </div> <?php } ?>
+            
+            <?php 
+                $index++;
+            }  ?>
         </div>
+
         <div class="all-articles">
             <a href="index.php?action=home" class="btn-home-articles">Voir tous les articles</a>
         </div>
