@@ -9,8 +9,7 @@
         
     </head>
     <body>
-        <?php include 'views/layouts/header.php' ?>
-               
+        <?php include 'views/layouts/header.php' ?>      
         <div class="container" id="home"> 
         <?php $article_top = $articles[0] ?>  
             <div class="row first-row">
@@ -30,11 +29,9 @@
                     <p>Je m'appelle Jean Forteroche, je suis acteur et écrivain et travaille actuellement sur mon prochain roman, "Billet simple pour l'Alaska".</p>
                 </div>
             </div>
-            
             <div>
                 <h2 class="main-title">Derniers articles</h2>
             </div>
-
             <?php $index = 0; ?>
             <?php for ($i=1; $i < sizeof($articles); $i++)   { ?>
                 <?php if ($index % 3 == 0) { ?> 
@@ -50,14 +47,11 @@
                 <?php $index++; ?>
                 <?php if ($index % 3 == 0) { ?> 
                 </div> <?php } ?>
-            
             <?php }  ?>
         </div>
         <div class="all-articles">
             <a href="index.php?action=home" class="btn-home-articles">Voir tous les articles</a>
         </div>
-        
         <?php include 'views/layouts/footer.php' ?>
-
     </body>
 </html>
