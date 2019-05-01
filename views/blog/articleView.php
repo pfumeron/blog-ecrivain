@@ -26,12 +26,11 @@
             
             <div class="comment-list">
                 <h4>Commentaires</h4>
-                <?php for ($i=0; $i < sizeof($comments); $i++) { ?>
-                    <div class="comment-block">
-                        <p class="comment-reviewed"><?= nl2br(htmlspecialchars($comments[$i]->comment)); ?></p>
-                            <a href="index.php?action=alertComment&articleId=<?php echo $comments[$i]->article_id ?>&id=<?php echo $comments[$i]->id ?>" class="icon-alert">&#9758; Signaler</a>
-                        <p class="comment-info">Ajouté par <?= htmlspecialchars($comments[$i]->author); ?>, le <?= $comments[$i]->comment_date; ?></p>
-                    </div>
+                <?php for ($i=0; $i < sizeof($comments); $i++) { ?><div class="comment-block">
+                    <div class="comment-reviewed"><?= nl2br(htmlspecialchars($comments[$i]->comment)); ?></div>
+                    <a href="index.php?action=alertComment&articleId=<?php echo $comments[$i]->article_id ?>&id=<?php echo $comments[$i]->id ?>" class="icon-alert">&#9758; Signaler</a>
+                    <p class="comment-info">Ajouté par <?= htmlspecialchars($comments[$i]->author); ?>, le <?= $comments[$i]->comment_date; ?></p>
+                </div>
                 <?php } ?>
             </div>
     
