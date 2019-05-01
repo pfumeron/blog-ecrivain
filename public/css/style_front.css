@@ -296,7 +296,7 @@ footer p {
 	padding: 10px 10px 0px 20px;
 }
 
-input[type=text], textarea, input[type=password] {
+input[type=email], textarea, input[type=password] {
 	padding: 5px 0;
 	width: 50%;
 	border-radius: 4px;
@@ -387,12 +387,9 @@ h4 {
 	margin-right: 20px;
 }
 
-.admin-left-block {
-	
+.loginError {
+	color:red;
 }
-
-.admin-latest-article-list {
-	}
 
 .btn-view-admin {
 	border: solid 1px #005574;

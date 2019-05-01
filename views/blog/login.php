@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <title>Blog Ecrivain</title>
         <meta charset="utf-8" />
@@ -12,11 +12,15 @@
             
         </div>
         <div class="commment-form login">
-            <h3>Veuillez entrer le mot de passe </h3>
+            <h3>Connexion à l'administration du blog</h3>
+            <?php if (isset($_GET['error']) && $_GET['error']) { 
+                echo "<span class='loginError'>Mauvais mot de passe ou email</span>";
+            } ?>
             
             <form action="index.php?action=loginVerify" method="post">
-                
-                <input type=text name="email">
+                <label for="email">Votre email</label><br />
+                <input type=email name="email"><br />
+                <label for="email">Votre mot de passe</label><br />
                 <input type="password" name="password" />
                 <input type="submit" id ="submit-login" value="Valider" />
                 

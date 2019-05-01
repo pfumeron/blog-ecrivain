@@ -14,11 +14,9 @@ function login($email, $password){
 	if (isset($adminlogged)) {
         session_start();
         $_SESSION['id'] = $adminlogged['id'];
-        
 		header("Location: ".getenv('HOSTNAME')."/index.php?action=adminArticles");
 	} else {
-    	echo 'Mauvais identifiant ou mot de passe !';
-		header("Location: ".getenv('HOSTNAME')."/index.php?action=login");
+		header("Location: ".getenv('HOSTNAME')."/index.php?action=login&error=true");
 	}
 }
 
