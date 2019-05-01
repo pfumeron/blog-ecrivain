@@ -9,14 +9,11 @@
     </head>
     <body>
         <?php include 'views/layouts/header.php' ?>
-            
-        </div>
         <div class="commment-form login">
             <h3>Connexion à l'administration du blog</h3>
             <?php if (isset($_GET['error']) && ($_GET['error'])) { 
                 echo "<span class='loginError'>Mauvais mot de passe ou email</span>";
             } ?>
-            
             <form action="index.php?action=loginVerify" method="post">
                 <label for="email">Votre email</label><br />
                 <input type=email id="email" name="email"><br />
