@@ -20,14 +20,14 @@
                 <div class="content-article-title">
                     <h3><?= htmlspecialchars($article->title); ?></h3>
                 </div>
-                <p class="date">Publié le <? echo $article->creation_date; ?></p>
-                <p class="text-article"><?=$article->content; ?></p>
+                <div class="date">Publié le <? echo $article->creation_date; ?></div>
+                <div class="text-article"><?=$article->content; ?></div>
             </div>
             
             <div class="comment-list">
                 <h4>Commentaires</h4>
                 <?php for ($i=0; $i < sizeof($comments); $i++) { ?><div class="comment-block">
-                    <div class="comment-reviewed"><?= nl2br(htmlspecialchars($comments[$i]->comment)); ?></div>
+                    <p class="comment-reviewed"><?= nl2br(htmlspecialchars($comments[$i]->comment)); ?></p>
                     <a href="index.php?action=alertComment&articleId=<?php echo $comments[$i]->article_id ?>&id=<?php echo $comments[$i]->id ?>" class="icon-alert">&#9758; Signaler</a>
                     <p class="comment-info">Ajouté par <?= htmlspecialchars($comments[$i]->author); ?>, le <?= $comments[$i]->comment_date; ?></p>
                 </div>
