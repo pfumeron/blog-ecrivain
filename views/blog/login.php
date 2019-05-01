@@ -13,7 +13,7 @@
         </div>
         <div class="commment-form login">
             <h3>Connexion à l'administration du blog</h3>
-            <?php if (isset($_GET['error']) && $_GET['error']) { 
+            <?php if (isset($_GET['error']) && ($_GET['error'])) { 
                 echo "<span class='loginError'>Mauvais mot de passe ou email</span>";
             } ?>
             
@@ -23,11 +23,9 @@
                 <label for="email">Votre mot de passe</label><br />
                 <input type="password" id="password" name="password" />
                 <input type="submit" id ="submit-login" value="Valider" />
-                
             </form>
         </div>
        
         <?php include 'views/layouts/footer.php' ?>
-        
     </body>
 </html>
