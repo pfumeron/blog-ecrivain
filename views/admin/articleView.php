@@ -18,14 +18,14 @@
     </head>
         
     <body>
-		<div class="navbar-header">
+		<nav>
             <div class="logo">
                 <img src="public/images/logo_blog.png"/>
             </div>
             <ul>
                 <li>Administration du site</li>
             </ul>
-        </div>
+        </nav>
 
 		<div class="btn-class top-right">
 			<a class="btn-view-admin" href="index.php?action=newArticle">Créer un nouvel article</a>
