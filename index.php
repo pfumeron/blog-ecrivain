@@ -164,7 +164,7 @@ if (isset($_GET['action'])) {
     elseif ($_GET['action'] == 'deleteComment') {
         session_start(); 
         if (isset($_SESSION['id'])){
-            deleteComment();
+            deleteComment($_GET['id']);
         } else {  
             header("Location: ".getenv('HOSTNAME')."/index.php?action=login"); 
         } 

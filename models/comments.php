@@ -29,7 +29,7 @@ class Comment {
                 $new_obj_comment = new Comment();
 
                 $new_obj_comment->id = $data['id'];
-                $new_obj_comment->article_id = $data['id'];
+                $new_obj_comment->article_id = $data['article_id'];
                 $new_obj_comment->author = $data['author'];
                 $new_obj_comment->comment = $data['comment'];
                 $new_obj_comment->comment_date = $data['comment_date'];

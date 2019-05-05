@@ -43,20 +43,20 @@ function showPreviewArticle($articleId) {
 
 // COMMENTS ADMINISTRATION
 
-function validComment($articleId){
-	Comment::update($articleId);
+function validComment($commentId){
+	Comment::update($commentId);
 	header("Location: ".getenv('HOSTNAME')."/index.php?action=adminGetArticle&id=" . $_GET['articleId']);
 }
 
-function deleteComment($articleId){
-	Comment::remove($articleId);
+function deleteComment($commentId){
+	Comment::remove($commentId);
 	header("Location: ".getenv('HOSTNAME')."/index.php?action=adminGetArticle&id=" . $_GET['articleId']);
 }
 
 // UNFLAG COMMENT ON A ARTICLE
 
-function verifiedComment($articleId){
-	Comment::unflag($articleId);
+function verifiedComment($commentId){
+	Comment::unflag($commentId);
 	header("Location: ".getenv('HOSTNAME')."/index.php?action=adminGetArticle&id=" . $_GET['articleId']);
 }
 
