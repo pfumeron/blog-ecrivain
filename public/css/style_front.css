@@ -269,7 +269,7 @@ footer p {
 .content-article-title {
 	background-color: #C3EAE2;
 	line-height: 12px;
-    margin-top: 40px;
+    margin-top: 50px;
     margin-bottom: 30px;
     border-bottom: 4px solid #C3EAE2;
 }
@@ -352,25 +352,33 @@ h4 {
 	padding: 10px 10px 0px 20px;
 }
 
+.comment-list a.true {
+	display: none;
+}
+
+.comment-list a.true:hover {
+	display: none;
+}
+
 .comment-reviewed {
 	margin-bottom: 0;
 	font-size:16px;
 }
 
-.comment-reviewed:hover + a {
+/*.comment-reviewed:hover + a {
 	display: inline-block;
 	color:grey;
 	font-size:12px;
-}
+}*/
 
 
-.icon-alert {
+.comment-list a.null {
 	display: block;
 	color:#aaaaaa;
 	font-size:12px;
 }
 
-.icon-alert:hover {
+.comment-list a.null:hover {
 	color:black;
 }
 
@@ -508,4 +516,12 @@ tr .brouillon-status span {
 	text-align:center;
 	font-family: "Josefin Sans","Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 22px;
+}
+
+.preview-title {
+	text-align: center;
+    padding: 10px;
+    border: 2px dotted orange;
+    border-radius: 10px;
+    background-color: #fff5d8;
 }

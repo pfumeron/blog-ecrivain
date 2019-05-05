@@ -83,6 +83,18 @@ if (isset($_GET['action'])) {
             header("Location: ".getenv('HOSTNAME')."/index.php?action=login"); 
         }
     }
+    elseif ($_GET['action'] == 'previewArticle') {
+        session_start(); 
+        if (isset($_SESSION['id'])){
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+            showPreviewArticle($_GET['id']);
+            } else {
+                echo 'Erreur : aucun identifiant de billet envoyé';
+            }
+        } else {  
+            header("Location: ".getenv('HOSTNAME')."/index.php?action=login"); 
+        }
+    }
     elseif ($_GET['action'] == 'createArticle') {
         session_start(); 
         if (isset($_SESSION['id'])){
@@ -137,6 +149,14 @@ if (isset($_GET['action'])) {
         session_start(); 
         if (isset($_SESSION['id'])){
             validComment($_GET['id']);
+        } else {  
+            header("Location: ".getenv('HOSTNAME')."/index.php?action=login"); 
+        } 
+    }
+    elseif ($_GET['action'] == 'unflag') {
+        session_start(); 
+        if (isset($_SESSION['id'])){
+            verifiedComment($_GET['id']);
         } else {  
             header("Location: ".getenv('HOSTNAME')."/index.php?action=login"); 
         } 

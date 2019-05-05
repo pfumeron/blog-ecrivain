@@ -8,11 +8,19 @@ class Comment {
     public $status;
     public $flaggued;
 
-    static function get($articleId, $status) // DISPLAY COMMENTS BASED ON STATUS OF A SPECIFIC ARTICLE
+    static function get($articleId, $status, $flaggued=null) // DISPLAY COMMENTS BASED ON STATUS OF A SPECIFIC ARTICLE
         {
             $db = dbConnect();
-            $comments = $db->prepare('SELECT id, article_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date, status, flaggued FROM comments WHERE article_id = ? AND status = ? ORDER BY comment_date ASC');
-            $comments->execute(array($articleId,$status));
+            if ($flaggued == 'all') {
+                $comments = $db->prepare('SELECT id, article_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date, status, flaggued FROM comments WHERE article_id = ? AND status = ? ORDER BY comment_date ASC');
+                $comments->execute(array($articleId,$status));
+            } else if ($flaggued == 'flaggued') {
+                $comments = $db->prepare('SELECT id, article_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date, status, flaggued FROM comments WHERE article_id = ? AND status = ? AND flaggued = \'true\' ORDER BY comment_date ASC');
+                $comments->execute(array($articleId,$status));
+            } else {
+                $comments = $db->prepare('SELECT id, article_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date, status, flaggued FROM comments WHERE article_id = ? AND status = ? AND flaggued IS null ORDER BY comment_date ASC');
+                $comments->execute(array($articleId,$status));
+            }
 
             $obj_comments = [];
 
@@ -26,7 +34,7 @@ class Comment {
                 $new_obj_comment->comment = $data['comment'];
                 $new_obj_comment->comment_date = $data['comment_date'];
                 $new_obj_comment->status = $data['status'];
-                $new_obj_comment->status = $data['flaggued'];
+                $new_obj_comment->flaggued = $data['flaggued'];
 
                 array_push($obj_comments, $new_obj_comment);
             }
@@ -56,6 +64,12 @@ class Comment {
         static function flag($commentId) { // FLAG COMMENT 
             $db = dbConnect();
             $comments = $db->prepare('UPDATE comments SET flaggued = \'true\' WHERE id = ?');
+            $comments->execute(array($commentId));
+        }
+
+        static function unflag($commentId) { // UNFLAG COMMENT 
+            $db = dbConnect();
+            $comments = $db->prepare('UPDATE comments SET flaggued = null WHERE id = ?');
             $comments->execute(array($commentId));
         }
 }

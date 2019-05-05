@@ -45,11 +45,12 @@
                         </a>
                         <p>Publié le <?php echo $articles[$i]->creation_date ?></p>
                     </div>
-                <?php if ($index % 3 == 0) { ?> </div> <?php } ?>
-            
+                
             <?php 
                 $index++;
+
             }  ?>
+            <?php if ($index % 3 == 0) { ?> </div> <?php } ?>
         </div>
 
         <div class="all-articles">

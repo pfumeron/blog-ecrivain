@@ -21,7 +21,7 @@ function listArticles()
 function listArticleAndComment($articleId)
 {
     $article = Article::get($articleId);
-    $comments = Comment::get($articleId,'validated');
+    $comments = Comment::get($articleId,'validated','all');
     require('views/blog/articleView.php');
 }
 

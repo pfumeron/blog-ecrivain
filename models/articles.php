@@ -34,10 +34,10 @@ class Article {
     static function findAll($articleStatus=null) { // DISPLAY ALL ARTICLES ON HOME BLOG PAGE & ADMIN
     $db = dbConnect();    
     if ($articleStatus) {
-        $articles = $db->prepare('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date, a.article_status, SUM( CASE WHEN c.status = \'under_review\' THEN 1 ELSE 0 END) AS nbNewComment, COUNT(c.id) as nbTotalComments FROM articles as a LEFT JOIN comments as c ON a.id = c.article_id WHERE a.article_status = ? GROUP BY a.id ORDER BY a.creation_date DESC');
+        $articles = $db->prepare('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date, a.article_status, SUM( CASE WHEN c.status = \'under_review\' THEN 1 ELSE 0 END) AS nbNewComment, COUNT(c.id) as nbTotalComments, SUM(CASE WHEN c.flaggued = \'true\' THEN 1 ELSE 0 END) AS flagguedComment, COUNT(c.flaggued) as nbFlagguedComments FROM articles as a LEFT JOIN comments as c ON a.id = c.article_id WHERE a.article_status = ? GROUP BY a.id ORDER BY a.creation_date DESC');
         $articles->execute(array($articleStatus));
     } else {
-        $articles = $db->query('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date, a.article_status, SUM( CASE WHEN c.status = \'under_review\' THEN 1 ELSE 0 END) AS nbNewComment, COUNT(c.id) as nbTotalComments FROM articles as a LEFT JOIN comments as c ON a.id = c.article_id GROUP BY a.id ORDER BY a.creation_date DESC');
+        $articles = $db->query('SELECT a.id, a.title, a.content, DATE_FORMAT(a.creation_date, \'%d/%m/%Y\') AS creation_date, a.article_status, SUM( CASE WHEN c.status = \'under_review\' THEN 1 ELSE 0 END) AS nbNewComment, COUNT(c.id) as nbTotalComments, SUM(CASE WHEN c.flaggued = \'true\' THEN 1 ELSE 0 END) AS flagguedComment, COUNT(c.flaggued) as nbFlagguedComments FROM articles as a LEFT JOIN comments as c ON a.id = c.article_id GROUP BY a.id ORDER BY a.creation_date DESC');
         $articles->execute();
     }
 
@@ -54,6 +54,7 @@ class Article {
             $new_obj_article->article_status = $data['article_status'];
             $new_obj_article->nbNewComment = $data['nbNewComment'];
             $new_obj_article->nbTotalComments = $data['nbTotalComments'];
+            $new_obj_article->nbFlagguedComments = $data['nbFlagguedComments'];
 
             array_push($obj_articles, $new_obj_article);
         }

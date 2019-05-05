@@ -32,7 +32,13 @@ function adminArticles($articleStatus=null){
 function showArticleWithComments($articleId) {
 	$article = Article::get($articleId);
 	$comments = Comment::get($articleId,'under_review');
+	$flagguedComments = Comment::get($articleId,'validated','flaggued');
 	require('views/admin/pageViewComments.php');
+}
+
+function showPreviewArticle($articleId) {
+	$article = Article::get($articleId);
+	require('views/admin/previewArticle.php');
 }
 
 // COMMENTS ADMINISTRATION
@@ -44,6 +50,13 @@ function validComment($articleId){
 
 function deleteComment($articleId){
 	Comment::remove($articleId);
+	header("Location: ".getenv('HOSTNAME')."/index.php?action=adminGetArticle&id=" . $_GET['articleId']);
+}
+
+// UNFLAG COMMENT ON A ARTICLE
+
+function verifiedComment($articleId){
+	Comment::unflag($articleId);
 	header("Location: ".getenv('HOSTNAME')."/index.php?action=adminGetArticle&id=" . $_GET['articleId']);
 }
 

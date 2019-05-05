@@ -36,10 +36,7 @@
         <div class="container" id="article-page">
             <div class="content-article">
                 <div class="content-article-title">
-                    <? if (isset($alert)) {
-                        echo $alert; 
-                    }
-                    ?>
+                    
                     <h3><?= htmlspecialchars($article->title) ?></h3>
                 </div>
                 <p class="date">Publié le <? echo $article->creation_date ?></p>
@@ -48,12 +45,31 @@
             </div>
             
             <div class="comment-list">
-                <?php for ($i=0; $i < sizeof($comments); $i++) { ?>
+                <h4>Nouveaux commentaires</h4>
+                <?php if (sizeof($comments) == 0) { 
+                    echo "<p>Il n'y a pas de nouveaux commentaires.</p>"; }
+                    else { for ($i=0; $i < sizeof($comments); $i++) { ?>
                     <p class="comment-reviewed"><?= nl2br(htmlspecialchars($comments[$i]->comment)) ?></p>
                     <p class="comment-info">Ajouté par <?= htmlspecialchars($comments[$i]->author) ?>, le <?= $comments[$i]->comment_date ?></p>
                     <a class="btn-comments" onClick="javascript: return confirm('Voulez-vous publier ce commentaire ?');" href="index.php?action=validComment&articleId=<?php echo $comments[$i]->article_id ?>&id=<?php echo $comments[$i]->id ?>">Valider</a> 
                     <a class="btn-comments" onClick="javascript: return confirm('Voulez-vous supprimer ce commentaire ? Cette action est définitive');" href="index.php?action=deleteComment&articleId=<?php echo $comments[$i]->article_id ?>&id=<?php echo $comments[$i]->id ?>">Supprimer</a>
                 <?php
+                    }
+                }
+                ?>
+
+            </div>
+            <div class="comment-list">
+                <h4>Commentaires Signalés</h4>
+                <?php if (sizeof($flagguedComments) == 0) { 
+                    echo "<p>Il n'y a pas de commentaires signalés.</p>"; }
+                    else { for ($i=0; $i < sizeof($flagguedComments); $i++) { ?>
+                    <p class="comment-reviewed"><?= nl2br(htmlspecialchars($flagguedComments[$i]->comment)) ?></p>
+                    <p class="comment-info">Ajouté par <?= htmlspecialchars($flagguedComments[$i]->author) ?>, le <?= $flagguedComments[$i]->comment_date ?></p>
+                    <a class="btn-comments" onClick="javascript: return confirm('Voulez-vous confirmer ce commentaire ?');" href="index.php?action=unflag&articleId=<?php echo $flagguedComments[$i]->article_id ?>&id=<?php echo $flagguedComments[$i]->id ?>">Confirmer</a> 
+                    <a class="btn-comments" onClick="javascript: return confirm('Voulez-vous supprimer ce commentaire ? Cette action est définitive');" href="index.php?action=deleteComment&articleId=<?php echo $flagguedComments[$i]->article_id ?>&id=<?php echo $flagguedComments[$i]->id ?>">Supprimer</a>
+                <?php
+                    }
                 }
                 ?>
             </div>

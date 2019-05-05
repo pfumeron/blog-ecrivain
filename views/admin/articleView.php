@@ -66,10 +66,17 @@
 			        ?>
 		        		<tr class="table-content">
 		        			<td><?php echo $articles[$i]->creation_date; ?></td>
-		        			<td><?php echo htmlspecialchars($articles[$i]->title); ?></td>
+		        			<td>
+		        				<?php if ($articles[$i]->article_status=='brouillon') { ?>
+		        					<a href="index.php?action=previewArticle&id=<? echo $articles[$i]->id ?>"><?php echo htmlspecialchars($articles[$i]->title); ?></a>
+		        				<?php } else { ?>
+		        					<a href="index.php?action=getArticle&id=<?php echo $articles[$i]->id ?>" target="_blank;"><?php echo htmlspecialchars($articles[$i]->title); ?></a>
+		        				<?php } ?>
+		        					
+		        				</td>
 		        			<td class="<?php echo $articles[$i]->article_status; ?>-status"><span><?php echo $articles[$i]->article_status; ?></span></td>
 		        			<td><a class="btn-new-comment" href="index.php?action=adminGetArticle&id=<? echo $articles[$i]->id ?>"><?php echo $articles[$i]->nbNewComment; ?></a></td>
-		        			<td>Nb signalés</td>
+		        			<td><a class="btn-new-comment" href="index.php?action=adminGetArticle&id=<? echo $articles[$i]->id ?>"><?php echo $articles[$i]->nbFlagguedComments; ?></a></td>
 							<td><?php echo $articles[$i]->nbTotalComments; ?></td>
 		        			<td class="<?php echo $articles[$i]->article_status; ?>" >
 		        				<a class="btn-publish" onClick="javascript: return confirm('Voulez-vous publier cet article ?');" href="index.php?action=publishArticle&id=<?php echo $articles[$i]->id ?>">Publier |</a>  
